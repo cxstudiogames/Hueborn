@@ -1,0 +1,16 @@
+{
+    "name": "ColorRPG.Online.Editor",
+    "rootNamespace": "ColorRPG.EditorTools",
+    "references": [ "Unity.Services.DeploymentApi" ],
+    "includePlatforms": [ "Editor" ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [
+        { "name": "com.unity.services.deployment.api", "expression": "1.0.0", "define": "CRPG_DEPLOY_API" }
+    ],
+    "noEngineReferences": false
+}

@@ -1,0 +1,20 @@
+{
+    "name": "ColorRPG.Online.Chat",
+    "rootNamespace": "ColorRPG.Net",
+    "references": [
+        "Unity.Services.Core",
+        "Unity.Services.Authentication",
+        "Unity.Services.Vivox"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        { "name": "com.unity.services.vivox", "expression": "16.0.0", "define": "CRPG_VIVOX" }
+    ],
+    "noEngineReferences": false
+}

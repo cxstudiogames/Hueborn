@@ -1,0 +1,30 @@
+# Unity
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+/[Mm]emoryCaptures/
+*.csproj
+*.sln
+*.slnx
+*.suo
+*.user
+*.pidb
+*.booproj
+*.apk
+*.aab
+*.unitypackage
+.vs/
+.vscode/
+.idea/
+.utmp/
+.plastic/
+# Hueborn: secrete si fisiere locale (NU se urca pe GitHub)
+/Keystore/
+*.keystore
+*.jks
+keystore_info.txt
+/_Backups/

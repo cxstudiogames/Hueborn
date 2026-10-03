@@ -1,0 +1,24 @@
+{
+    "name": "ColorRPG.Online.MP",
+    "rootNamespace": "ColorRPG.Net",
+    "references": [
+        "Unity.Services.Core",
+        "Unity.Services.Authentication",
+        "Unity.Services.Multiplayer",
+        "Unity.Netcode.Runtime",
+        "Unity.Networking.Transport",
+        "Unity.Collections"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        { "name": "com.unity.services.multiplayer", "expression": "1.0.0", "define": "CRPG_MP" },
+        { "name": "com.unity.netcode.gameobjects", "expression": "2.0.0", "define": "CRPG_NGO" }
+    ],
+    "noEngineReferences": false
+}

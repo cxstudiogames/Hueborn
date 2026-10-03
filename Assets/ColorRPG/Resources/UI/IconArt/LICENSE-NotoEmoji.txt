@@ -1,0 +1,5 @@
+Icons in this folder are rendered from Noto Color Emoji (Google).
+Noto Emoji images are licensed under the Apache License, Version 2.0
+(http://www.apache.org/licenses/LICENSE-2.0); the font is under the SIL Open Font License 1.1.
+https://github.com/googlefonts/noto-emoji
+The icons were resized and given a dark outline + drop shadow for the game UI.

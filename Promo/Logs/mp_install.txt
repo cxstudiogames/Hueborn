@@ -1,0 +1,14 @@
+time: 02/10/2026 19:59:32
+status: Success
+com.unity.netcode.gameobjects 2.13.3
+com.unity.services.authentication 3.7.3
+com.unity.services.cloudsave 3.4.1
+com.unity.services.deployment 1.7.2
+com.unity.services.leaderboards 2.3.4
+com.unity.services.multiplayer 2.3.3
+com.unity.services.vivox 16.12.1
+com.unity.services.core 1.18.0
+com.unity.transport 6.6.0
+com.unity.services.qos 1.4.1
+com.unity.services.wire 1.5.1
+com.unity.services.deployment.api 1.1.3

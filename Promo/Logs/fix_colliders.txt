@@ -1,0 +1,2 @@
+colliders checked 293, moved 0, without visual 17
+time: 03/10/2026 21:14:09

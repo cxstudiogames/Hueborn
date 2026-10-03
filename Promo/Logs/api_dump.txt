@@ -1,0 +1,1476 @@
+##### Unity.Networking.Transport
+##### Unity.Netcode.Runtime
+== enum Unity.Netcode.ConnectionEvent : Enum [IFormattable,IComparable,IConvertible]
+   ClientConnected, PeerConnected, ClientDisconnected, PeerDisconnected
+== struct Unity.Netcode.ConnectionEventData : ValueType
+   F ConnectionEvent EventType
+   F UInt64 ClientId
+   F NativeArray<UInt64> PeerClientIds
+== class Unity.Netcode.CustomMessagingManager
+   E UnnamedMessageDelegate OnUnnamedMessage
+   M Void SendUnnamedMessageToAll(FastBufferWriter messageBuffer, NetworkDelivery networkDelivery=ReliableSequenced)
+   M Void SendUnnamedMessage(IReadOnlyList<UInt64> clientIds, FastBufferWriter messageBuffer, NetworkDelivery networkDelivery=ReliableSequenced)
+   M Void SendUnnamedMessage(UInt64 clientId, FastBufferWriter messageBuffer, NetworkDelivery networkDelivery=ReliableSequenced)
+   M Void RegisterNamedMessageHandler(String name, HandleNamedMessageDelegate callback)
+   M Void UnregisterNamedMessageHandler(String name)
+   M Void SendNamedMessageToAll(String messageName, FastBufferWriter messageStream, NetworkDelivery networkDelivery=ReliableSequenced)
+   M Void SendNamedMessage(String messageName, UInt64 clientId, FastBufferWriter messageStream, NetworkDelivery networkDelivery=ReliableSequenced)
+   M Void SendNamedMessage(String messageName, IReadOnlyList<UInt64> clientIds, FastBufferWriter messageStream, NetworkDelivery networkDelivery=ReliableSequenced)
+== struct Unity.Netcode.FastBufferReader : ValueType [IDisposable]
+   P Int32 Position
+   P Int32 Length
+   P Boolean IsInitialized
+   C (NativeArray<Byte> buffer, Allocator copyAllocator, Int32 length=-1, Int32 offset=0, Allocator internalAllocator=Temp)
+   C (ArraySegment<Byte> buffer, Allocator copyAllocator, Int32 length=-1, Int32 offset=0)
+   C (ArraySegment<Byte> buffer, Allocator copyAllocator, Int32 length=-1)
+   C (ArraySegment<Byte> buffer, Allocator copyAllocator)
+   C (Byte[] buffer, Allocator copyAllocator, Int32 length=-1, Int32 offset=0)
+   C (Byte* buffer, Allocator copyAllocator, Int32 length, Int32 offset=0, Allocator internalAllocator=Temp)
+   C (FastBufferWriter writer, Allocator copyAllocator, Int32 length=-1, Int32 offset=0, Allocator internalAllocator=Temp)
+   C (FastBufferReader reader, Allocator copyAllocator, Int32 length=-1, Int32 offset=0, Allocator internalAllocator=Temp)
+   M Void Dispose()
+   M Void Seek(Int32 where)
+   M BitReader EnterBitwiseContext()
+   M Boolean TryBeginRead(Int32 bytes)
+   M Boolean TryBeginReadValue<T>(T& value)
+   M Byte[] ToArray()
+   M Byte* GetUnsafePtr()
+   M Byte* GetUnsafePtrAtCurrentPosition()
+   M Void ReadNetworkSerializable<T>(T& value)
+   M Void ReadNetworkSerializable<T>(T[]& value)
+   M Void ReadNetworkSerializable<T>(NativeArray`1& value, Allocator allocator)
+   M Void ReadNetworkSerializableInPlace<T>(T& value)
+   M Void ReadValue(String& s, Boolean oneByteChars=False)
+   M Void ReadValueSafe(String& s, Boolean oneByteChars=False)
+   M Void ReadPartialValue<T>(T& value, Int32 bytesToRead, Int32 offsetBytes=0)
+   M Void ReadByte(Byte& value)
+   M Void ReadByteSafe(Byte& value)
+   M Void ReadBytes(Byte* value, Int32 size, Int32 offset=0)
+   M Void ReadBytesSafe(Byte* value, Int32 size, Int32 offset=0)
+   M Void ReadBytes(Byte[]& value, Int32 size, Int32 offset=0)
+   M Void ReadBytesSafe(Byte[]& value, Int32 size, Int32 offset=0)
+   M Void ReadValue<T>(T& value, ForNetworkSerializable unused=null)
+   M Void ReadValue<T>(T[]& value, ForNetworkSerializable unused=null)
+   M Void ReadValueSafe<T>(T& value, ForNetworkSerializable unused=null)
+   M Void ReadValueSafe<T>(T[]& value, ForNetworkSerializable unused=null)
+   M Void ReadValueSafe<T>(NativeArray`1& value, Allocator allocator, ForNetworkSerializable unused=null)
+   M Void ReadValue<T>(T& value, ForStructs unused=null)
+   M Void ReadValue<T>(T[]& value, ForStructs unused=null)
+   M Void ReadValue<T>(NativeArray`1& value, Allocator allocator, ForGeneric unused=null)
+   M Void ReadValueTemp<T>(NativeArray`1& value, ForGeneric unused=null)
+   M Void ReadValueSafe<T>(T& value, ForStructs unused=null)
+   M Void ReadValueSafe<T>(T[]& value, ForStructs unused=null)
+   M Void ReadValueSafe<T>(NativeArray`1& value, Allocator allocator, ForGeneric unused=null)
+   M Void ReadValueSafeTemp<T>(NativeArray`1& value, ForGeneric unused=null)
+   M Void ReadValue<T>(T& value, ForPrimitives unused=null)
+   M Void ReadValue<T>(T[]& value, ForPrimitives unused=null)
+   M Void ReadValueSafe<T>(T& value, ForPrimitives unused=null)
+   M Void ReadValueSafe<T>(T[]& value, ForPrimitives unused=null)
+   M Void ReadValue<T>(T& value, ForEnums unused=null)
+   M Void ReadValue<T>(T[]& value, ForEnums unused=null)
+   M Void ReadValueSafe<T>(T& value, ForEnums unused=null)
+   M Void ReadValueSafe<T>(T[]& value, ForEnums unused=null)
+   M Void ReadValue(Vector2& value)
+   M Void ReadValue(Vector2[]& value)
+   M Void ReadValue(Vector3& value)
+   M Void ReadValue(Vector3[]& value)
+   M Void ReadValue(Vector2Int& value)
+   M Void ReadValue(Vector2Int[]& value)
+   M Void ReadValue(Vector3Int& value)
+   M Void ReadValue(Vector3Int[]& value)
+   M Void ReadValue(Vector4& value)
+   M Void ReadValue(Vector4[]& value)
+   M Void ReadValue(Quaternion& value)
+   M Void ReadValue(Quaternion[]& value)
+   M Void ReadValue(Pose& value)
+   M Void ReadValue(Pose[]& value)
+   M Void ReadValue(Color& value)
+   M Void ReadValue(Color[]& value)
+   M Void ReadValue(Color32& value)
+   M Void ReadValue(Color32[]& value)
+   M Void ReadValue(Ray& value)
+   M Void ReadValue(Ray[]& value)
+   M Void ReadValue(Ray2D& value)
+   M Void ReadValue(Ray2D[]& value)
+   M Void ReadValueSafe(Vector2& value)
+   M Void ReadValueSafe(Vector2[]& value)
+   M Void ReadValueSafe(Vector3& value)
+   M Void ReadValueSafe(Vector3[]& value)
+   M Void ReadValueSafe(Vector2Int& value)
+   M Void ReadValueSafe(Vector2Int[]& value)
+   M Void ReadValueSafe(Vector3Int& value)
+   M Void ReadValueSafe(Vector3Int[]& value)
+   M Void ReadValueSafe(Vector4& value)
+   M Void ReadValueSafe(Vector4[]& value)
+   M Void ReadValueSafe(Quaternion& value)
+   M Void ReadValueSafe(Quaternion[]& value)
+   M Void ReadValueSafe(Pose& value)
+   M Void ReadValueSafe(Pose[]& value)
+   M Void ReadValueSafe(Color& value)
+   M Void ReadValueSafe(Color[]& value)
+   M Void ReadValueSafe(Color32& value)
+   M Void ReadValueSafe(Color32[]& value)
+   M Void ReadValueSafe(Ray& value)
+   M Void ReadValueSafe(Ray[]& value)
+   M Void ReadValueSafe(Ray2D& value)
+   M Void ReadValueSafe(Ray2D[]& value)
+   M Void ReadValue<T>(T& value, ForFixedStrings unused=null)
+   M Void ReadValueSafe<T>(T& value, ForFixedStrings unused=null)
+   M Void ReadValueSafeInPlace<T>(T& value, ForFixedStrings unused=null)
+   M Void ReadValueSafe<T>(NativeArray`1& value, Allocator allocator)
+   M Void ReadValueSafeTemp<T>(NativeArray`1& value)
+   M Void ReadValueSafe<T>(T[]& value, ForFixedStrings unused=null)
+== struct Unity.Netcode.FastBufferWriter : ValueType [IDisposable]
+   P Int32 Position
+   P Int32 Capacity
+   P Int32 MaxCapacity
+   P Int32 Length
+   P Boolean IsInitialized
+   C (Int32 size, Allocator allocator, Int32 maxSize=-1)
+   M Void Dispose()
+   M Void Seek(Int32 where)
+   M Void Truncate(Int32 where=-1)
+   M BitWriter EnterBitwiseContext()
+   M Boolean TryBeginWrite(Int32 bytes)
+   M Boolean TryBeginWriteValue<T>(T& value)
+   M Boolean TryBeginWriteInternal(Int32 bytes)
+   M Byte[] ToArray()
+   M Byte* GetUnsafePtr()
+   M Byte* GetUnsafePtrAtCurrentPosition()
+   M static Int32 GetWriteSize(String s, Boolean oneByteChars=False)
+   M Void WriteNetworkSerializable<T>(T& value)
+   M Void WriteNetworkSerializable<T>(T[] array, Int32 count=-1, Int32 offset=0)
+   M Void WriteNetworkSerializable<T>(NativeArray<T> array, Int32 count=-1, Int32 offset=0)
+   M Void WriteValue(String s, Boolean oneByteChars=False)
+   M Void WriteValueSafe(String s, Boolean oneByteChars=False)
+   M static Int32 GetWriteSize<T>(T[] array, Int32 count=-1, Int32 offset=0)
+   M static Int32 GetWriteSize<T>(NativeArray<T> array, Int32 count=-1, Int32 offset=0)
+   M Void WritePartialValue<T>(T value, Int32 bytesToWrite, Int32 offsetBytes=0)
+   M Void WriteByte(Byte value)
+   M Void WriteByteSafe(Byte value)
+   M Void WriteBytes(Byte* value, Int32 size, Int32 offset=0)
+   M Void WriteBytesSafe(Byte* value, Int32 size, Int32 offset=0)
+   M Void WriteBytes(Byte[] value, Int32 size=-1, Int32 offset=0)
+   M Void WriteBytes(NativeArray<Byte> value, Int32 size=-1, Int32 offset=0)
+   M Void WriteBytes(NativeList<Byte> value, Int32 size=-1, Int32 offset=0)
+   M Void WriteBytesSafe(Byte[] value, Int32 size=-1, Int32 offset=0)
+   M Void WriteBytesSafe(NativeArray<Byte> value, Int32 size=-1, Int32 offset=0)
+   M Void WriteBytesSafe(NativeList<Byte> value, Int32 size=-1, Int32 offset=0)
+   M Void CopyTo(FastBufferWriter other)
+   M Void CopyFrom(FastBufferWriter other)
+   M static Int32 GetWriteSize<T>(T& value, ForStructs unused=null)
+   M static Int32 GetWriteSize<T>(T& value)
+   M static Int32 GetWriteSize<T>(NativeArray`1& value)
+   M static Int32 GetWriteSize<T>()
+   M Void WriteValue<T>(T& value, ForNetworkSerializable unused=null)
+   M Void WriteValue<T>(T[] value, ForNetworkSerializable unused=null)
+   M Void WriteValueSafe<T>(T& value, ForNetworkSerializable unused=null)
+   M Void WriteValueSafe<T>(T[] value, ForNetworkSerializable unused=null)
+   M Void WriteValue<T>(T& value, ForStructs unused=null)
+   M Void WriteValue<T>(T[] value, ForStructs unused=null)
+   M Void WriteValue<T>(NativeArray<T> value, ForGeneric unused=null)
+   M Void WriteValueSafe<T>(T& value, ForStructs unused=null)
+   M Void WriteValueSafe<T>(T[] value, ForStructs unused=null)
+   M Void WriteValueSafe<T>(NativeArray<T> value, ForGeneric unused=null)
+   M Void WriteValue<T>(T& value, ForPrimitives unused=null)
+   M Void WriteValue<T>(T[] value, ForPrimitives unused=null)
+   M Void WriteValueSafe<T>(T& value, ForPrimitives unused=null)
+   M Void WriteValueSafe<T>(T[] value, ForPrimitives unused=null)
+   M Void WriteValue<T>(T& value, ForEnums unused=null)
+   M Void WriteValue<T>(T[] value, ForEnums unused=null)
+   M Void WriteValueSafe<T>(T& value, ForEnums unused=null)
+   M Void WriteValueSafe<T>(T[] value, ForEnums unused=null)
+   M Void WriteValue(Vector2& value)
+   M Void WriteValue(Vector2[] value)
+   M Void WriteValue(Vector3& value)
+   M Void WriteValue(Vector3[] value)
+   M Void WriteValue(Vector2Int& value)
+   M Void WriteValue(Vector2Int[] value)
+   M Void WriteValue(Vector3Int& value)
+   M Void WriteValue(Vector3Int[] value)
+   M Void WriteValue(Vector4& value)
+   M Void WriteValue(Vector4[] value)
+   M Void WriteValue(Quaternion& value)
+   M Void WriteValue(Quaternion[] value)
+   M Void WriteValue(Pose& value)
+   M Void WriteValue(Pose[] value)
+   M Void WriteValue(Color& value)
+   M Void WriteValue(Color[] value)
+   M Void WriteValue(Color32& value)
+   M Void WriteValue(Color32[] value)
+   M Void WriteValue(Ray& value)
+   M Void WriteValue(Ray[] value)
+   M Void WriteValue(Ray2D& value)
+   M Void WriteValue(Ray2D[] value)
+   M Void WriteValueSafe(Vector2& value)
+   M Void WriteValueSafe(Vector2[] value)
+   M Void WriteValueSafe(Vector3& value)
+   M Void WriteValueSafe(Vector3[] value)
+   M Void WriteValueSafe(Vector2Int& value)
+   M Void WriteValueSafe(Vector2Int[] value)
+   M Void WriteValueSafe(Vector3Int& value)
+   M Void WriteValueSafe(Vector3Int[] value)
+   M Void WriteValueSafe(Vector4& value)
+   M Void WriteValueSafe(Vector4[] value)
+   M Void WriteValueSafe(Quaternion& value)
+   M Void WriteValueSafe(Quaternion[] value)
+   M Void WriteValueSafe(Pose& value)
+   M Void WriteValueSafe(Pose[] value)
+   M Void WriteValueSafe(Color& value)
+   M Void WriteValueSafe(Color[] value)
+   M Void WriteValueSafe(Color32& value)
+   M Void WriteValueSafe(Color32[] value)
+   M Void WriteValueSafe(Ray& value)
+   M Void WriteValueSafe(Ray[] value)
+   M Void WriteValueSafe(Ray2D& value)
+   M Void WriteValueSafe(Ray2D[] value)
+   M Void WriteValue<T>(T& value, ForFixedStrings unused=null)
+   M Void WriteValue<T>(T[] value, ForFixedStrings unused=null)
+   M Void WriteValue<T>(NativeArray`1& value, ForFixedStrings unused=null)
+   M Void WriteValueSafe<T>(T& value, ForFixedStrings unused=null)
+   M Void WriteValueSafe<T>(T[] value, ForFixedStrings unused=null)
+   M Void WriteValueSafe<T>(NativeArray`1& value)
+== class Unity.Netcode.NetworkConfig
+   F UInt16 ProtocolVersion
+   F NetworkTransport NetworkTransport
+   F GameObject PlayerPrefab
+   F NetworkPrefabs Prefabs
+   F UInt32 TickRate
+   F Int32 ClientConnectionBufferTimeout
+   F Boolean ConnectionApproval
+   F Byte[] ConnectionData
+   F Boolean EnableTimeResync
+   F Int32 TimeResyncInterval
+   F Boolean EnsureNetworkVariableLengthSafety
+   F Boolean EnableSceneManagement
+   F Boolean ForceSamePrefabs
+   F Boolean RecycleNetworkIds
+   F Single NetworkIdRecycleDelay
+   F HashSize RpcHashSize
+   F Int32 LoadSceneTimeOut
+   F Single SpawnTimeout
+   F Boolean EnableNetworkLogs
+   F static Int32 RttAverageSamples
+   F static Int32 RttWindowSize
+   F NetworkTopologyTypes NetworkTopology
+   F Boolean UseCMBService
+   F Boolean AutoSpawnPlayerPrefabClientSide
+   F Boolean NetworkProfilingMetrics
+   C ()
+   M String ToBase64()
+   M Void FromBase64(String base64)
+   M UInt64 GetConfig(Boolean cache=True)
+   M Boolean CompareConfig(UInt64 hash)
+== enum Unity.Netcode.NetworkDelivery : Enum [IFormattable,IComparable,IConvertible]
+   Unreliable, UnreliableSequenced, Reliable, ReliableSequenced, ReliableFragmentedSequenced
+== class Unity.Netcode.NetworkManager : MonoBehaviour [INetworkUpdateSystem]
+   P Boolean DistributedAuthorityMode {get;set;}
+   P Boolean CMBServiceConnection
+   P Boolean AutoSpawnPlayerPrefabClientSide
+   P Boolean DAHost
+   P UInt64 CurrentSessionOwner {get;set;}
+   P UInt64 LocalClientId {get;set;}
+   P IReadOnlyDictionary<UInt64,NetworkClient> ConnectedClients
+   P IReadOnlyList<NetworkClient> ConnectedClientsList
+   P IReadOnlyList<UInt64> ConnectedClientsIds
+   P NetworkClient LocalClient
+   P Boolean IsServer
+   P Boolean ServerIsHost
+   P Boolean IsClient
+   P Boolean IsHost
+   P String DisconnectReason
+   P DisconnectEvents DisconnectEvent
+   P Boolean IsListening {get;set;}
+   P Boolean IsConnectedClient {get;set;}
+   P Boolean IsApproved {get;set;}
+   P Action<ConnectionApprovalRequest,ConnectionApprovalResponse> ConnectionApprovalCallback {get;set;}
+   P String ConnectedHostname
+   P Boolean ShutdownInProgress
+   P NetworkTime LocalTime
+   P NetworkTime ServerTime
+   P NetworkManager Singleton {get;set;}
+   P NetworkPrefabHandler PrefabHandler
+   P NetworkSpawnManager SpawnManager {get;set;}
+   P CustomMessagingManager CustomMessagingManager {get;set;}
+   P NetworkSceneManager SceneManager {get;set;}
+   P NetworkTimeSystem NetworkTimeSystem {get;set;}
+   P NetworkTickSystem NetworkTickSystem {get;set;}
+   P Int32 MaximumTransmissionUnitSize {get;set;}
+   P Int32 MaximumFragmentedMessageSize {get;set;}
+   E Action<NetworkManager> OnInstantiated
+   E Action<NetworkManager> OnDestroying
+   E OnSessionOwnerPromotedDelegateHandler OnSessionOwnerPromoted
+   E Action OnTransportFailure
+   E ReanticipateDelegate OnReanticipate
+   E Action<UInt64> OnClientConnectedCallback
+   E Action<UInt64> OnClientDisconnectCallback
+   E Action<NetworkManager,ConnectionEventData> OnConnectionEvent
+   E Action OnServerStarted
+   E Action OnClientStarted
+   E Action OnPreShutdown
+   E Action<Boolean> OnServerStopped
+   E Action<Boolean> OnClientStopped
+   F Boolean NetworkManagerExpanded
+   F static Dictionary<UInt32,RpcReceiveHandler> __rpc_func_table
+   F static Dictionary<UInt32,String> __rpc_name_table
+   F OnFetchLocalPlayerPrefabToSpawnDelegateHandler OnFetchLocalPlayerPrefabToSpawn
+   F static UInt64 ServerClientId
+   F Dictionary<UInt64,PendingClient> PendingClients
+   F NetworkConfig NetworkConfig
+   F Boolean RunInBackground
+   F LogLevel LogLevel
+   F RpcTarget RpcTarget
+   C ()
+   M Void NetworkUpdate(NetworkUpdateStage updateStage)
+   M Void SetSingleton()
+   M GameObject GetNetworkPrefabOverride(GameObject gameObject)
+   M Void AddNetworkPrefab(GameObject prefab)
+   M Void RemoveNetworkPrefab(GameObject prefab)
+   M Void SetPeerMTU(UInt64 clientId, Int32 size)
+   M Int32 GetPeerMTU(UInt64 clientId)
+   M Boolean StartServer()
+   M Boolean StartClient()
+   M Boolean StartHost()
+   M UInt64 GetTransportIdFromClientId(UInt64 clientId)
+   M UInt64 GetClientIdFromTransportId(UInt64 transportId)
+   M Void DisconnectClient(UInt64 clientId)
+   M Void DisconnectClient(UInt64 clientId, String reason=null)
+   M Void Shutdown(Boolean discardMessageQueue=False)
+== class Unity.Netcode.NetworkTransport : MonoBehaviour
+   P UInt64 ServerClientId
+   P Boolean IsSupported
+   P DisconnectEvents DisconnectEvent {get;set;}
+   P String DisconnectEventMessage {get;set;}
+   E TransportEventDelegate OnTransportEvent
+   M Void Send(UInt64 clientId, ArraySegment<Byte> payload, NetworkDelivery networkDelivery)
+   M NetworkEvent PollEvent(UInt64& clientId, ArraySegment`1& payload, Single& receiveTime)
+   M Boolean StartClient()
+   M Boolean StartServer()
+   M Void DisconnectRemoteClient(UInt64 clientId)
+   M Void DisconnectLocalClient()
+   M UInt64 GetCurrentRtt(UInt64 clientId)
+   M Void Shutdown()
+   M Void Initialize(NetworkManager networkManager=null)
+   M Void EarlyUpdate()
+   M Void PostLateUpdate()
+== class Unity.Netcode.Transports.UTP.UnityTransport : NetworkTransport [INetworkStreamDriverConstructor]
+   P INetworkStreamDriverConstructor DriverConstructor
+   P Boolean UseWebSockets {get;set;}
+   P Boolean UseEncryption {get;set;}
+   P Int32 MaxPacketQueueSize {get;set;}
+   P Int32 MaxPayloadSize {get;set;}
+   P Int32 MaxSendQueueSize {get;set;}
+   P Int32 HeartbeatTimeoutMS {get;set;}
+   P Int32 ConnectTimeoutMS {get;set;}
+   P Int32 MaxConnectAttempts {get;set;}
+   P Int32 DisconnectTimeoutMS {get;set;}
+   P UInt64 ServerClientId
+   P ProtocolType Protocol
+   F static Int32 InitialMaxPacketQueueSize
+   F static Int32 InitialMaxPayloadSize
+   F static Int32 InitialMaxSendQueueSize
+   F static INetworkStreamDriverConstructor s_DriverConstructor
+   F ConnectionAddressData ConnectionData
+   F SimulatorParameters DebugSimulator
+   C ()
+   M NetworkDriver& GetNetworkDriver()
+   M NetworkEndpoint GetLocalEndpoint()
+   M NetworkSettings GetDefaultNetworkSettings()
+   M Void GetDefaultPipelineConfigurations(NativeArray`1& unreliableFragmentedPipelineStages, NativeArray`1& unreliableSequencedFragmentedPipelineStages, NativeArray`1& reliableSequencedPipelineStages)
+   M Void GetDefaultPipelineConfigurations(NetworkDriver& driver, NativeArray`1& unreliableFragmentedPipelineStages, NativeArray`1& unreliableSequencedFragmentedPipelineStages, NativeArray`1& reliableSequencedPipelineStages)
+   M Void SetRelayServerData(String ipv4Address, UInt16 port, Byte[] allocationIdBytes, Byte[] keyBytes, Byte[] connectionDataBytes, Byte[] hostConnectionDataBytes=null, Boolean isSecure=False)
+   M Void SetRelayServerData(RelayServerData serverData)
+   M Void SetHostRelayData(String ipAddress, UInt16 port, Byte[] allocationId, Byte[] key, Byte[] connectionData, Boolean isSecure=False)
+   M Void SetClientRelayData(String ipAddress, UInt16 port, Byte[] allocationId, Byte[] key, Byte[] connectionData, Byte[] hostConnectionData, Boolean isSecure=False)
+   M Void SetConnectionData(String ipv4Address, UInt16 port, String listenAddress=null)
+   M Void SetConnectionData(Boolean forceOverrideCommandLineArgs, String ipv4Address, UInt16 port, String listenAddress=null)
+   M Void SetConnectionData(NetworkEndpoint endPoint, NetworkEndpoint listenEndPoint=null)
+   M Void SetDebugSimulatorParameters(Int32 packetDelay, Int32 packetJitter, Int32 dropRate)
+   M Void DisconnectLocalClient()
+   M Void DisconnectRemoteClient(UInt64 clientId)
+   M UInt64 GetCurrentRtt(UInt64 clientId)
+   M NetworkEndpoint GetEndpoint(UInt64 clientId)
+   M NetworkEvent PollEvent(UInt64& clientId, ArraySegment`1& payload, Single& receiveTime)
+   M Void Send(UInt64 clientId, ArraySegment<Byte> payload, NetworkDelivery networkDelivery)
+   M Boolean StartClient()
+   M Boolean StartServer()
+   M Void Initialize(NetworkManager networkManager=null)
+   M Void Shutdown()
+   M Void SetServerSecrets(String serverCertificate, String serverPrivateKey)
+   M Void SetClientSecrets(String serverCommonName, String caCertificate=null)
+   M Void CreateDriver(UnityTransport transport, NetworkDriver& driver, NetworkPipeline& unreliableFragmentedPipeline, NetworkPipeline& unreliableSequencedFragmentedPipeline, NetworkPipeline& reliableSequencedPipeline)
+##### Unity.Services.Multiplayer
+== class LobbyEventCallbacks
+   E Action<ILobbyChanges> LobbyChanged
+   E Action<List<LobbyPlayerJoined>> PlayerJoined
+   E Action<List<Int32>> PlayerLeft
+   E Action<Dictionary<String,ChangedOrRemovedLobbyValue<DataObject>>> DataChanged
+   E Action<Dictionary<String,ChangedOrRemovedLobbyValue<DataObject>>> DataRemoved
+   E Action<Dictionary<String,ChangedOrRemovedLobbyValue<DataObject>>> DataAdded
+   E Action<Dictionary<Int32,Dictionary<String,ChangedOrRemovedLobbyValue<PlayerDataObject>>>> PlayerDataChanged
+   E Action<Dictionary<Int32,Dictionary<String,ChangedOrRemovedLobbyValue<PlayerDataObject>>>> PlayerDataRemoved
+   E Action<Dictionary<Int32,Dictionary<String,ChangedOrRemovedLobbyValue<PlayerDataObject>>>> PlayerDataAdded
+   E Action LobbyDeleted
+   E Action KickedFromLobby
+   E Action<LobbyEventConnectionState> LobbyEventConnectionStateChanged
+   C ()
+== static class Unity.Services.Core.UnityServicesExtensions
+   M static IMultiplayerService GetMultiplayerService(IUnityServices unityServices)
+   M static ILobbyService GetLobbyService(IUnityServices unityServices)
+   M static IRelayService GetRelayService(IUnityServices unityServices)
+   M static IMatchmakerService GetMatchmakerService(IUnityServices unityServices)
+== struct Unity.Services.Lobbies.ChangedLobbyValue`1 : ValueType
+   P T Value
+   P Boolean Changed
+   P Boolean Added {get;set;}
+   C (T value)
+== struct Unity.Services.Lobbies.ChangedOrRemovedLobbyValue`1 : ValueType
+   P T Value
+   P Boolean Removed
+   P Boolean Changed
+   P Boolean Added
+   P LobbyValueChangeType ChangeType
+   F static ChangedOrRemovedLobbyValue<T> RemoveThisValue
+   C (T value, LobbyValueChangeType status)
+== class Unity.Services.Lobbies.CreateLobbyOptions
+   P Nullable<Boolean> IsPrivate {get;set;}
+   P String Password {get;set;}
+   P Nullable<Boolean> IsLocked {get;set;}
+   P Player Player {get;set;}
+   P Dictionary<String,DataObject> Data {get;set;}
+   C ()
+== class Unity.Services.Lobbies.Http.DeserializationException : Exception [ISerializable,_Exception]
+   C ()
+   C (String message)
+== class Unity.Services.Lobbies.Http.DeserializationSettings
+   F MissingMemberHandling MissingMemberHandling
+   C ()
+== interface Unity.Services.Lobbies.Http.IDeserializable
+   M String GetAsString()
+   M T GetAs<T>(DeserializationSettings deserializationSettings=null)
+== class Unity.Services.Lobbies.Http.JsonObject [IDeserializable]
+   M String GetAsString()
+   M T GetAs<T>(DeserializationSettings deserializationSettings=null)
+   M T GetAs<T>()
+   M static IDeserializable GetNewJsonObjectResponse(Object o)
+   M static List<IDeserializable> GetNewJsonObjectResponse(List<Object> o)
+   M static List<List<IDeserializable>> GetNewJsonObjectResponse(List<List<Object>> o)
+   M static Dictionary<String,IDeserializable> GetNewJsonObjectResponse(Dictionary<String,Object> o)
+   M static Dictionary<String,List<IDeserializable>> GetNewJsonObjectResponse(Dictionary<String,List<Object>> o)
+== class Unity.Services.Lobbies.Http.JsonObjectConverter : JsonConverter
+   C ()
+   M Void WriteJson(JsonWriter writer, Object value, JsonSerializer serializer)
+   M Object ReadJson(JsonReader reader, Type objectType, Object existingValue, JsonSerializer serializer)
+   M Boolean CanConvert(Type objectType)
+== enum Unity.Services.Lobbies.Http.MissingMemberHandling : Enum [IFormattable,IComparable,IConvertible]
+   Error, Ignore
+== interface Unity.Services.Lobbies.ILobbyChanges
+   P Boolean LobbyDeleted
+   P ChangedLobbyValue<String> Name
+   P ChangedLobbyValue<Boolean> IsPrivate
+   P ChangedLobbyValue<Boolean> IsLocked
+   P ChangedLobbyValue<Boolean> HasPassword
+   P ChangedLobbyValue<Int32> AvailableSlots
+   P ChangedLobbyValue<Int32> MaxPlayers
+   P ChangedOrRemovedLobbyValue<Dictionary<String,ChangedOrRemovedLobbyValue<DataObject>>> Data
+   P ChangedLobbyValue<List<Int32>> PlayerLeft
+   P ChangedLobbyValue<List<LobbyPlayerJoined>> PlayerJoined
+   P ChangedLobbyValue<Dictionary<Int32,LobbyPlayerChanges>> PlayerData
+   P ChangedLobbyValue<String> HostId
+   P ChangedLobbyValue<Int32> Version
+   P ChangedLobbyValue<DateTime> LastUpdated
+   M Void ApplyToLobby(Lobby lobby)
+== interface Unity.Services.Lobbies.ILobbyEvents
+   P LobbyEventCallbacks Callbacks
+   M Task SubscribeAsync()
+   M Task UnsubscribeAsync()
+== interface Unity.Services.Lobbies.ILobbyService
+   P Boolean ConcurrencyControlEnabled {get;set;}
+   M Task<Lobby> CreateLobbyAsync(String lobbyName, Int32 maxPlayers, CreateLobbyOptions options=null)
+   M Task<Lobby> CreateOrJoinLobbyAsync(String lobbyId, String lobbyName, Int32 maxPlayers, CreateLobbyOptions options=null)
+   M Task<ILobbyEvents> SubscribeToLobbyEventsAsync(String lobbyId, LobbyEventCallbacks callbacks)
+   M Task DeleteLobbyAsync(String lobbyId)
+   M Task<List<String>> GetJoinedLobbiesAsync()
+   M Task<Lobby> GetLobbyAsync(String lobbyId)
+   M Task<Lobby> GetLobbyAsync(String lobbyId, String ifNoneMatchVersion)
+   M Task SendHeartbeatPingAsync(String lobbyId)
+   M Task<Lobby> JoinLobbyByCodeAsync(String lobbyCode, JoinLobbyByCodeOptions options=null)
+   M Task<Lobby> JoinLobbyByIdAsync(String lobbyId, JoinLobbyByIdOptions options=null)
+   M Task<QueryResponse> QueryLobbiesAsync(QueryLobbiesOptions options=null)
+   M Task<Lobby> QuickJoinLobbyAsync(QuickJoinLobbyOptions options=null)
+   M Task RemovePlayerAsync(String lobbyId, String playerId)
+   M Task<Lobby> UpdateLobbyAsync(String lobbyId, UpdateLobbyOptions options)
+   M Task<Lobby> UpdatePlayerAsync(String lobbyId, String playerId, UpdatePlayerOptions options)
+   M Task<Lobby> ReconnectToLobbyAsync(String lobbyId)
+   M Task<MigrationDataInfo> GetMigrationDataInfoAsync(String lobbyId)
+   M Task<LobbyMigrationData> DownloadMigrationDataAsync(MigrationDataInfo migrationDataInfo, LobbyDownloadMigrationDataOptions options)
+   M Task<LobbyUploadMigrationDataResults> UploadMigrationDataAsync(MigrationDataInfo migrationDataInfo, Byte[] data, LobbyUploadMigrationDataOptions options)
+== interface Unity.Services.Lobbies.ILobbyServiceSDK [ILobbyService]
+== interface Unity.Services.Lobbies.ILobbyServiceSDKConfiguration
+   M Void SetBasePath(String basePath)
+== class Unity.Services.Lobbies.JoinLobbyByCodeOptions
+   P Player Player {get;set;}
+   P String Password {get;set;}
+   C ()
+== class Unity.Services.Lobbies.JoinLobbyByIdOptions
+   P Player Player {get;set;}
+   P String Password {get;set;}
+   C ()
+== enum Unity.Services.Lobbies.LobbyEventConnectionState : Enum [IFormattable,IComparable,IConvertible]
+   Unknown, Unsubscribed, Subscribing, Subscribed, Unsynced, Error
+== enum Unity.Services.Lobbies.LobbyExceptionReason : Enum [IFormattable,IComparable,IConvertible]
+   UnknownErrorCode, ValidationError, LobbyNotFound, PlayerNotFound, LobbyConflict, LobbyFull, LobbyLocked, NoOpenLobbies, LobbyAlreadyExists, IncorrectPassword, InvalidJoinCode, MigrationDataRequestTimeout, LobbyVersionDoesNotMatch, InvalidArgument, BadRequest, Unauthorized, PaymentRequired, Forbidden, EntityNotFound, MethodNotAllowed, NotAcceptable, ProxyAuthenticationRequired, RequestTimeOut, Conflict, Gone, LengthRequired, PreconditionFailed, RequestEntityTooLarge, RequestUriTooLong, UnsupportedMediaType, RangeNotSatisfiable, ExpectationFailed, Teapot, Misdirected, UnprocessableTransaction, Locked, FailedDependency, TooEarly, UpgradeRequired, PreconditionRequired, RateLimited, RequestHeaderFieldsTooLarge, UnavailableForLegalReasons, InternalServerError, NotImplemented, BadGateway, ServiceUnavailable, GatewayTimeout, HttpVersionNotSupported, VariantAlsoNegotiates, InsufficientStorage, LoopDetected, NotExtended, NetworkAuthenticationRequired, AlreadySubscribedToLobby, AlreadyUnsubscribedFromLobby, SubscriptionToLobbyLostWhileBusy, LobbyEventServiceConnectionError, NetworkError, Unknown
+== class Unity.Services.Lobbies.LobbyPlayerChanges
+   P Int32 PlayerIndex
+   P ChangedLobbyValue<String> ConnectionInfoChanged {get;set;}
+   P ChangedLobbyValue<DateTime> LastUpdatedChanged {get;set;}
+   P ChangedOrRemovedLobbyValue<Dictionary<String,ChangedOrRemovedLobbyValue<PlayerDataObject>>> ChangedData {get;set;}
+   C (Int32 index)
+== struct Unity.Services.Lobbies.LobbyPlayerJoined : ValueType
+   P Int32 PlayerIndex
+   P Player Player
+   C (Int32 index, Player player)
+== static class Unity.Services.Lobbies.LobbyService
+   P ILobbyService Instance {get;set;}
+== class Unity.Services.Lobbies.LobbyServiceException : RequestFailedException [ISerializable,_Exception]
+   P LobbyExceptionReason Reason {get;set;}
+   P ErrorStatus ApiError
+   C (LobbyExceptionReason reason, String message, Exception innerException)
+   C (LobbyExceptionReason reason, String message)
+   C (Int64 errorCode, String message)
+   C (Exception innerException)
+== static class Unity.Services.Lobbies.LobbyValue
+   M static ChangedLobbyValue<T> Changed<T>(T value)
+   M static ChangedLobbyValue<T> Added<T>(T value)
+   M static ChangedOrRemovedLobbyValue<T> ChangedNotRemoved<T>(T value)
+   M static ChangedOrRemovedLobbyValue<T> ChangeAdded<T>(T value)
+   M static ChangedOrRemovedLobbyValue<T> Removed<T>()
+== enum Unity.Services.Lobbies.LobbyValueChangeType : Enum [IFormattable,IComparable,IConvertible]
+   Unchanged, Changed, Removed, Added
+== class Unity.Services.Lobbies.Models.CreateRequest
+   P String Name
+   P Int32 MaxPlayers
+   P Nullable<Boolean> IsPrivate
+   P Nullable<Boolean> IsLocked
+   P Player Player
+   P String Password
+   P Dictionary<String,DataObject> Data
+   C (String name, Int32 maxPlayers, Nullable<Boolean> isPrivate=False, Nullable<Boolean> isLocked=False, Player player=null, Dictionary<String,DataObject> data=null, String password=null)
+== class Unity.Services.Lobbies.Models.DataObject
+   P String Value
+   P VisibilityOptions Visibility
+   P IndexOptions Index
+   C (VisibilityOptions visibility, String value=null, IndexOptions index=0)
+== enum Unity.Services.Lobbies.Models.DataObject+IndexOptions : Enum [IFormattable,IComparable,IConvertible]
+   S1, S2, S3, S4, S5, N1, N2, N3, N4, N5
+== enum Unity.Services.Lobbies.Models.DataObject+VisibilityOptions : Enum [IFormattable,IComparable,IConvertible]
+   Public, Member, Private
+== class Unity.Services.Lobbies.Models.Detail
+   P String ErrorType
+   P String Message
+   C (String errorType=null, String message=null)
+== class Unity.Services.Lobbies.Models.ErrorStatus
+   P String Type
+   P Int32 Status
+   P String Title
+   P String Detail
+   P Int32 Code
+   P List<Detail> Details
+   C (String type=null, Int32 status=0, String title=null, String detail=null, Int32 code=0, List<Detail> details=null)
+== interface Unity.Services.Lobbies.Models.IOneOf
+   P Type Type
+   P Object Value
+== class Unity.Services.Lobbies.Models.JoinByCodeRequest
+   P String LobbyCode
+   P String Password
+   P Player Player
+   C (String lobbyCode, Player player=null, String password=null)
+== class Unity.Services.Lobbies.Models.JoinByIdRequest
+   P String Password
+   P Player Player
+   C (String password=null, Player player=null)
+== class Unity.Services.Lobbies.Models.Lobby
+   P String Id {get;set;}
+   P String LobbyCode {get;set;}
+   P String Upid {get;set;}
+   P String EnvironmentId {get;set;}
+   P String Name {get;set;}
+   P Int32 MaxPlayers {get;set;}
+   P Int32 AvailableSlots {get;set;}
+   P Boolean IsPrivate {get;set;}
+   P Boolean IsLocked {get;set;}
+   P Boolean HasPassword {get;set;}
+   P List<Player> Players {get;set;}
+   P Dictionary<String,DataObject> Data {get;set;}
+   P String HostId {get;set;}
+   P DateTime Created {get;set;}
+   P DateTime LastUpdated {get;set;}
+   P Int32 Version {get;set;}
+   C (String id=null, String lobbyCode=null, String upid=null, String environmentId=null, String name=null, Int32 maxPlayers=0, Int32 availableSlots=0, Boolean isPrivate=False, Boolean isLocked=False, List<Player> players=null, Dictionary<String,DataObject> data=null, String hostId=null, DateTime created=null, DateTime lastUpdated=null, Int32 version=0, Boolean hasPassword=False)
+== class Unity.Services.Lobbies.Models.LobbyDownloadMigrationDataOptions
+   P TimeSpan Timeout {get;set;}
+   F static TimeSpan DefaultTimeout
+   C ()
+== class Unity.Services.Lobbies.Models.LobbyMigrationData : MigrationData
+   P Byte[] Data
+   C (Byte[] data)
+== class Unity.Services.Lobbies.Models.LobbyUploadMigrationDataOptions
+   P TimeSpan Timeout {get;set;}
+   F static TimeSpan DefaultTimeout
+   C ()
+== class Unity.Services.Lobbies.Models.LobbyUploadMigrationDataResults
+   C ()
+== class Unity.Services.Lobbies.Models.MigrationData
+   P Byte[] Data
+== class Unity.Services.Lobbies.Models.MigrationDataInfo
+   P String Write
+   P String Read
+   P DateTime Expires
+   P Int32 MaxSize
+   C (String write=null, String read=null, DateTime expires=null, Int32 maxSize=0)
+== class Unity.Services.Lobbies.Models.Player
+   P String Id {get;set;}
+   P PlayerProfile Profile {get;set;}
+   P String ConnectionInfo {get;set;}
+   P Dictionary<String,PlayerDataObject> Data {get;set;}
+   P String AllocationId {get;set;}
+   P DateTime Joined {get;set;}
+   P DateTime LastUpdated {get;set;}
+   C (String id=null, String connectionInfo=null, Dictionary<String,PlayerDataObject> data=null, String allocationId=null, DateTime joined=null, DateTime lastUpdated=null, PlayerProfile profile=null)
+== class Unity.Services.Lobbies.Models.PlayerDataObject
+   P String Value {get;set;}
+   P VisibilityOptions Visibility {get;set;}
+   C (VisibilityOptions visibility, String value=null)
+== enum Unity.Services.Lobbies.Models.PlayerDataObject+VisibilityOptions : Enum [IFormattable,IComparable,IConvertible]
+   Public, Member, Private
+== class Unity.Services.Lobbies.Models.PlayerProfile
+   P String Name
+   C (String name=null)
+== class Unity.Services.Lobbies.Models.PlayerUpdateRequest
+   P String ConnectionInfo
+   P JsonObject Data
+   P String AllocationId
+   C (String connectionInfo=null, Dictionary<String,PlayerDataObject> data=null, String allocationId=null)
+== class Unity.Services.Lobbies.Models.QueryFilter
+   P FieldOptions Field
+   P String Value
+   P OpOptions Op
+   C (FieldOptions field, String value, OpOptions op)
+== enum Unity.Services.Lobbies.Models.QueryFilter+FieldOptions : Enum [IFormattable,IComparable,IConvertible]
+   MaxPlayers, AvailableSlots, Name, Created, LastUpdated, S1, S2, S3, S4, S5, N1, N2, N3, N4, N5, IsLocked, HasPassword
+== enum Unity.Services.Lobbies.Models.QueryFilter+OpOptions : Enum [IFormattable,IComparable,IConvertible]
+   CONTAINS, EQ, NE, LT, LE, GT, GE
+== class Unity.Services.Lobbies.Models.QueryOrder
+   P Boolean Asc
+   P FieldOptions Field
+   C (Boolean asc=False, FieldOptions field=0)
+== enum Unity.Services.Lobbies.Models.QueryOrder+FieldOptions : Enum [IFormattable,IComparable,IConvertible]
+   Name, MaxPlayers, AvailableSlots, Created, LastUpdated, ID, S1, S2, S3, S4, S5, N1, N2, N3, N4, N5
+== class Unity.Services.Lobbies.Models.QueryRequest
+   P Nullable<Int32> Count
+   P Nullable<Int32> Skip
+   P Boolean SampleResults
+   P List<QueryFilter> Filter
+   P List<QueryOrder> Order
+   P String ContinuationToken
+   C (Nullable<Int32> count=10, Nullable<Int32> skip=0, Boolean sampleResults=False, List<QueryFilter> filter=null, List<QueryOrder> order=null, String continuationToken=null)
+== class Unity.Services.Lobbies.Models.QueryResponse
+   P List<Lobby> Results
+   P String ContinuationToken
+   C (List<Lobby> results=null, String continuationToken=null)
+== class Unity.Services.Lobbies.Models.QuickJoinRequest
+   P List<QueryFilter> Filter
+   P Player Player
+   C (List<QueryFilter> filter=null, Player player=null)
+== class Unity.Services.Lobbies.Models.TokenData
+   P String TokenValue
+   P String Uri
+   C (String tokenValue=null, String uri=null)
+== class Unity.Services.Lobbies.Models.TokenRequest
+   P TokenTypeOptions TokenType
+   C (TokenTypeOptions tokenType)
+== enum Unity.Services.Lobbies.Models.TokenRequest+TokenTypeOptions : Enum [IFormattable,IComparable,IConvertible]
+   VivoxJoin, WireJoin
+== class Unity.Services.Lobbies.Models.UpdateRequest
+   P String Name
+   P Nullable<Int32> MaxPlayers
+   P Nullable<Boolean> IsPrivate
+   P Nullable<Boolean> IsLocked
+   P String Password
+   P JsonObject Data
+   P String HostId
+   C (String name=null, Nullable<Int32> maxPlayers=null, Nullable<Boolean> isPrivate=null, Nullable<Boolean> isLocked=null, Dictionary<String,DataObject> data=null, String hostId=null, String password=null)
+== class Unity.Services.Lobbies.QueryLobbiesOptions
+   P Int32 Count {get;set;}
+   P Int32 Skip {get;set;}
+   P Boolean SampleResults {get;set;}
+   P List<QueryFilter> Filters {get;set;}
+   P List<QueryOrder> Order {get;set;}
+   P String ContinuationToken {get;set;}
+   C ()
+== class Unity.Services.Lobbies.QuickJoinLobbyOptions
+   P Player Player {get;set;}
+   P List<QueryFilter> Filter {get;set;}
+   C ()
+== class Unity.Services.Lobbies.UpdateLobbyOptions
+   P String Name {get;set;}
+   P Nullable<Int32> MaxPlayers {get;set;}
+   P Nullable<Boolean> IsPrivate {get;set;}
+   P Nullable<Boolean> IsLocked {get;set;}
+   P String Password {get;set;}
+   P Dictionary<String,DataObject> Data {get;set;}
+   P String HostId {get;set;}
+   C ()
+== class Unity.Services.Lobbies.UpdatePlayerOptions
+   P String AllocationId {get;set;}
+   P String ConnectionInfo {get;set;}
+   P Dictionary<String,PlayerDataObject> Data {get;set;}
+   C ()
+== struct Unity.Services.Multiplayer.AddingSessionOptions : ValueType
+   F String Type
+   C (String type)
+== class Unity.Services.Multiplayer.BackfillingConfiguration
+   P Boolean Enable {get;set;}
+   P Boolean AutomaticallyRemovePlayers {get;set;}
+   P Boolean AutoStart {get;set;}
+   P Int32 BackfillingLoopInterval {get;set;}
+   P Int32 PlayerConnectionTimeout {get;set;}
+   C ()
+   M static BackfillingConfiguration WithBackfillingConfiguration(Boolean enable=True, Boolean automaticallyRemovePlayers=True, Boolean autoStart=True, Int32 playerConnectionTimeout=30, Int32 backfillingLoopInterval=1)
+== class Unity.Services.Multiplayer.BaseSessionOptions
+   P String Type {get;set;}
+   P Dictionary<String,PlayerProperty> PlayerProperties {get;set;}
+== class Unity.Services.Multiplayer.DirectNetworkOptions
+   P ListenIPAddress ListenIp
+   P PublishIPAddress PublishIp
+   P UInt16 Port
+   C ()
+   C (UInt16 port)
+   C (ListenIPAddress listenIp, PublishIPAddress publishIp, UInt16 port)
+== enum Unity.Services.Multiplayer.FilterField : Enum [IFormattable,IComparable,IConvertible]
+   MaxPlayers, AvailableSlots, Name, Created, LastUpdated, StringIndex1, StringIndex2, StringIndex3, StringIndex4, StringIndex5, NumberIndex1, NumberIndex2, NumberIndex3, NumberIndex4, NumberIndex5, IsLocked, HasPassword
+== enum Unity.Services.Multiplayer.FilterOperation : Enum [IFormattable,IComparable,IConvertible]
+   Contains, Equal, NotEqual, Less, LessOrEqual, Greater, GreaterOrEqual
+== class Unity.Services.Multiplayer.FilterOption
+   P FilterField Field
+   P String Value
+   P FilterOperation Operation
+   C (FilterField field, String value, FilterOperation operation)
+== interface Unity.Services.Multiplayer.IClientSessionNetwork
+   P NetworkState State
+   P INetworkHandler NetworkHandler {get;set;}
+   E Action<NetworkState> StateChanged
+   E Action<SessionError> StartFailed
+   E Action<SessionError> StopFailed
+   E Action<SessionError> MigrationFailed
+== interface Unity.Services.Multiplayer.IHostSession [ISession]
+   P String Name {get;set;}
+   P Boolean IsPrivate {get;set;}
+   P Boolean IsLocked {get;set;}
+   P String Host {get;set;}
+   P String Password {get;set;}
+   P IHostSessionNetwork Network
+   P IReadOnlyList<IPlayer> Players
+   M Task RemovePlayerAsync(String playerId)
+   M Task<SessionMigrationData> GetHostMigrationDataAsync(TimeSpan timeout)
+   M Task SetHostMigrationDataAsync(Byte[] data, TimeSpan timeout)
+   M Void SetProperties(Dictionary<String,SessionProperty> properties)
+   M Void SetProperty(String key, SessionProperty property)
+   M Task SavePropertiesAsync()
+   M Task SavePlayerDataAsync(String playerId)
+   M Task DeleteAsync()
+   M IPlayer GetPlayer(String playerId)
+== interface Unity.Services.Multiplayer.IHostSessionNetwork
+   P NetworkState State
+   P INetworkHandler NetworkHandler {get;set;}
+   E Action<NetworkState> StateChanged
+   E Action<SessionError> StartFailed
+   E Action<SessionError> StopFailed
+   E Action<SessionError> MigrationFailed
+   M Task StartDirectNetworkAsync(DirectNetworkOptions networkOptions)
+   M Task StartRelayNetworkAsync(RelayNetworkOptions networkOptions)
+   M Task StartDistributedAuthorityNetworkAsync(RelayNetworkOptions networkOptions)
+   M Task StopNetworkAsync()
+== interface Unity.Services.Multiplayer.IIpValidator
+   M Boolean IsValidIPAddress(String ip)
+   M Boolean TryParseIPAddress(String ip, NetworkEndpointAddress& endpoint)
+== interface Unity.Services.Multiplayer.IMigrationDataHandler
+   M Byte[] Generate()
+   M Void Apply(Byte[] migrationData)
+== interface Unity.Services.Multiplayer.IMultiplayerService
+   P IReadOnlyDictionary<String,ISession> Sessions
+   E Action<AddingSessionOptions> AddingSessionStarted
+   E Action<AddingSessionOptions,SessionException> AddingSessionFailed
+   E Action<ISession> SessionAdded
+   E Action<ISession> SessionRemoved
+   M Task<IHostSession> CreateSessionAsync(SessionOptions sessionOptions)
+   M Task<ISession> CreateOrJoinSessionAsync(String sessionId, SessionOptions sessionOptions)
+   M Task<ISession> JoinSessionByIdAsync(String sessionId, JoinSessionOptions sessionOptions=null)
+   M Task<ISession> JoinSessionByCodeAsync(String sessionCode, JoinSessionOptions sessionOptions=null)
+   M Task<ISession> ReconnectToSessionAsync(String sessionId, ReconnectSessionOptions options=null)
+   M Task<ISession> MatchmakeSessionAsync(MatchmakerOptions matchOptions, SessionOptions sessionOptions, CancellationToken cancellationToken=null)
+   M Task<ISession> MatchmakeSessionAsync(QuickJoinOptions quickJoinOptions, SessionOptions sessionOptions)
+   M Task<QuerySessionsResults> QuerySessionsAsync(QuerySessionsOptions queryOptions)
+   M Task<List<String>> GetJoinedSessionIdsAsync()
+== interface Unity.Services.Multiplayer.INetworkHandler
+   M Task StartAsync(NetworkConfiguration configuration)
+   M Task StopAsync()
+== interface Unity.Services.Multiplayer.IPlayer [IReadOnlyPlayer]
+   M Void SetAllocationId(String allocationId)
+   M Void SetProperties(Dictionary<String,PlayerProperty> properties)
+   M Void SetProperty(String key, PlayerProperty property)
+== interface Unity.Services.Multiplayer.IReadOnlyPlayer
+   P String Id
+   P String AllocationId
+   P IReadOnlyDictionary<String,PlayerProperty> Properties
+   P DateTime Joined
+   P DateTime LastUpdated
+== interface Unity.Services.Multiplayer.IServerSession [IHostSession,ISession]
+== interface Unity.Services.Multiplayer.ISession
+   P String Type
+   P String Name
+   P String Id
+   P String Code
+   P Boolean IsHost
+   P Boolean IsServer
+   P Boolean IsPrivate
+   P Boolean IsLocked
+   P Boolean HasPassword
+   P Int32 AvailableSlots
+   P Int32 MaxPlayers
+   P Int32 PlayerCount
+   P IReadOnlyList<IReadOnlyPlayer> Players
+   P IClientSessionNetwork Network
+   P IReadOnlyDictionary<String,SessionProperty> Properties
+   P String Host
+   P SessionState State
+   P IPlayer CurrentPlayer
+   P Boolean IsMember
+   P Boolean ConcurrencyControlEnabled {get;set;}
+   E Action Changed
+   E Action<SessionState> StateChanged
+   E Action<String> PlayerJoined
+   E Action<String> PlayerLeft
+   E Action<String> PlayerLeaving
+   E Action<String> PlayerHasLeft
+   E Action SessionPropertiesChanged
+   E Action PlayerPropertiesChanged
+   E Action RemovedFromSession
+   E Action Deleted
+   E Action<String> SessionHostChanged
+   E Action SessionMigrated
+   M Task SaveCurrentPlayerDataAsync()
+   M Task LeaveAsync()
+   M Task RefreshAsync()
+   M Task ReconnectAsync()
+   M IHostSession AsHost()
+   M IServerSession AsServer()
+   M Boolean HasPlayer(String playerId)
+   M IReadOnlyPlayer GetPlayer(String playerId)
+== interface Unity.Services.Multiplayer.ISessionInfo
+   P String Name
+   P String Id
+   P String Upid
+   P String HostId
+   P Int32 AvailableSlots
+   P Int32 MaxPlayers
+   P Boolean IsLocked
+   P Boolean HasPassword
+   P DateTime LastUpdated
+   P DateTime Created
+   P IReadOnlyDictionary<String,SessionProperty> Properties
+== class Unity.Services.Multiplayer.JoinSessionOptions : BaseSessionOptions
+   P String Password {get;set;}
+   C ()
+== struct Unity.Services.Multiplayer.ListenIPAddress : ValueType
+   P NetworkEndpointAddress NetworkEndpoint
+   P NetworkEndpoint UtpNetworkEndpoint
+   P ListenIPAddress LoopbackIpv4
+   P ListenIPAddress LoopbackIpv6
+   P ListenIPAddress AnyIpv4
+   P ListenIPAddress AnyIpv6
+   C (String address)
+   C (NetworkEndpointAddress endpoint)
+   M ListenIPAddress WithPort(UInt16 port)
+== static class Unity.Services.Multiplayer.MatchmakerExtensions
+   M static StoredMatchmakingResults GetMatchmakingResults(ISession session)
+== class Unity.Services.Multiplayer.MatchmakerOptions
+   P String QueueName {get;set;}
+   P Dictionary<String,Object> TicketAttributes {get;set;}
+   P Dictionary<String,PlayerProperty> PlayerProperties {get;set;}
+   C ()
+== class Unity.Services.Multiplayer.MatchmakerQueueAsset : ScriptableObject
+   P String Name {get;set;}
+   P Int32 MaxPlayers {get;set;}
+   P Int32 TimeoutSeconds {get;set;}
+   C ()
+== enum Unity.Services.Multiplayer.MatchmakerState : Enum [IFormattable,IComparable,IConvertible]
+   None, InProgress, Canceled, MatchFailed, MatchFound, JoinFailed, Joined
+== static class Unity.Services.Multiplayer.MultiplayerService
+   P IMultiplayerService Instance {get;set;}
+== class Unity.Services.Multiplayer.NetworkConfiguration
+   P NetworkRole Role
+   P NetworkType Type
+   P NetworkEndpoint DirectNetworkPublishAddress {get;set;}
+   P NetworkEndpoint DirectNetworkListenAddress {get;set;}
+   P RelayServerData RelayServerData
+   P RelayServerData RelayClientData
+   M Void UpdatePublishPort(UInt16 port)
+== struct Unity.Services.Multiplayer.NetworkEndpointAddress : ValueType
+   P UInt16 Port
+   P String Address
+   P String AddressNoPort
+   P NetworkEndpoint UtpEndpoint
+   F static NetworkEndpointAddress LoopbackIpv4
+   F static NetworkEndpointAddress LoopbackIpv6
+   F static NetworkEndpointAddress AnyIpv4
+   F static NetworkEndpointAddress AnyIpv6
+   C (String ip, UInt16 port)
+   C (NetworkEndpoint utpEndpoint)
+   M NetworkEndpointAddress WithPort(UInt16 port)
+== class Unity.Services.Multiplayer.NetworkOptions
+   P RelayProtocol RelayProtocol {get;set;}
+   C ()
+== enum Unity.Services.Multiplayer.NetworkRole : Enum [IFormattable,IComparable,IConvertible]
+   Client, Server, Host
+== enum Unity.Services.Multiplayer.NetworkState : Enum [IFormattable,IComparable,IConvertible]
+   Stopped, Starting, Started, Stopping, Migrating
+== enum Unity.Services.Multiplayer.NetworkType : Enum [IFormattable,IComparable,IConvertible]
+   Direct, Relay, DistributedAuthority
+== class Unity.Services.Multiplayer.PlayerProperty [IValueProperty,IVisibilityProperty]
+   P String Value
+   P VisibilityPropertyOptions Visibility
+   C (String value=null, VisibilityPropertyOptions visibility=Public)
+== enum Unity.Services.Multiplayer.PropertyIndex : Enum [IFormattable,IComparable,IConvertible]
+   None, String1, String2, String3, String4, String5, Number1, Number2, Number3, Number4, Number5
+== struct Unity.Services.Multiplayer.PublishIPAddress : ValueType
+   P NetworkEndpointAddress NetworkEndpoint
+   P NetworkEndpoint UtpNetworkEndpoint
+   P PublishIPAddress LoopbackIpv4
+   P PublishIPAddress LoopbackIpv6
+   C (String address)
+   C (NetworkEndpointAddress endpoint)
+   M PublishIPAddress WithPort(UInt16 port)
+== class Unity.Services.Multiplayer.QuerySessionsOptions
+   P Int32 Count {get;set;}
+   P Int32 Skip {get;set;}
+   P List<FilterOption> FilterOptions {get;set;}
+   P List<SortOption> SortOptions {get;set;}
+   P String ContinuationToken {get;set;}
+   C ()
+== class Unity.Services.Multiplayer.QuerySessionsResults
+   P String ContinuationToken {get;set;}
+   P IList<ISessionInfo> Sessions {get;set;}
+   M Void StartPolling(Int32 pollingDelaySeconds=5)
+   M Void StopPolling()
+== class Unity.Services.Multiplayer.QuickJoinOptions
+   P List<FilterOption> Filters {get;set;}
+   P TimeSpan Timeout {get;set;}
+   P Boolean CreateSession {get;set;}
+   C ()
+== class Unity.Services.Multiplayer.ReconnectSessionOptions
+   P String Type {get;set;}
+   C ()
+   M ReconnectSessionOptions WithNetworkHandler(INetworkHandler networkHandler)
+== class Unity.Services.Multiplayer.RelayNetworkOptions
+   P RelayProtocol Protocol
+   P String Region
+   P Boolean PreserveRegion
+   P RelayNetworkOptions Default
+   C (RelayProtocol protocol)
+   C (RelayProtocol protocol, String region)
+   C (RelayProtocol protocol, String region, Boolean preserveRegion)
+   C (String region=null, Boolean preserveRegion=False)
+== enum Unity.Services.Multiplayer.RelayProtocol : Enum [IFormattable,IComparable,IConvertible]
+   Unknown, UDP, DTLS, Default, WSS
+== enum Unity.Services.Multiplayer.SessionError : Enum [IFormattable,IComparable,IConvertible]
+   None, Unknown, NotAuthorized, NotInLobby, LobbyAlreadyExists, SessionTypeAlreadyExists, SessionNotFound, SessionDeleted, AllocationAlreadyExists, AllocationNotFound, Forbidden, RateLimitExceeded, InvalidParameter, InvalidMatchmakerTicket, InvalidMatchmakerAssignment, InvalidMatchmakerState, InvalidMatchmakerResults, InvalidNetworkConfig, InvalidSessionMetadata, InvalidPlatformOperation, InvalidOperation, MatchmakerAssignmentFailed, MatchmakerAssignmentTimeout, MatchmakerCancelled, MissingAssembly, MultiplayServerError, NetworkManagerNotInitialized, NetworkManagerStartFailed, NetworkSetupFailed, TranportComponentMissing, TransportComponentMissing, TransportInvalid, AlreadySubscribedToLobby, InvalidCreateSessionOptions, InvalidBackfillTicket, InvalidLocalMatchProperties, InvalidPlayerTeam, PlayerMissingTeamProperties, QoSMeasurementFailed, MigrationDataRequestTimeout, MatchmakerModuleMissing, InvalidMatchmakerOptions, OutOfSyncSession, InvalidSessionIdentifier, InvalidPlayerName, PlayerNameSynchronizationFailed, SessionConflict, InvalidBackfillTicketOptions
+== enum Unity.Services.Multiplayer.SessionEventConnectionState : Enum [IFormattable,IComparable,IConvertible]
+   Unknown, Unsubscribed, Subscribing, Subscribed, Unsynced, Error
+== class Unity.Services.Multiplayer.SessionException : Exception [ISerializable,_Exception]
+   P SessionError Error
+   C (String message, SessionError error, Exception innerException)
+   M String ToString()
+== class Unity.Services.Multiplayer.SessionMigrationData : MigrationData
+   P Byte[] Data
+== class Unity.Services.Multiplayer.SessionObserver [IDisposable]
+   P ISession Session {get;set;}
+   E Action<ISession> SessionAdded
+   E Action<AddingSessionOptions> AddingSessionStarted
+   E Action<AddingSessionOptions,SessionException> AddingSessionFailed
+   F String SessionType
+   C (String sessionType, IUnityServices registry)
+   C (String sessionType)
+   M Void Dispose()
+== class Unity.Services.Multiplayer.SessionOptions : BaseSessionOptions
+   P String Name {get;set;}
+   P Int32 MaxPlayers {get;set;}
+   P Boolean IsLocked {get;set;}
+   P Boolean IsPrivate {get;set;}
+   P String Password {get;set;}
+   P Dictionary<String,SessionProperty> SessionProperties {get;set;}
+   C ()
+== static class Unity.Services.Multiplayer.SessionOptionsExtensions
+   M static T WithRelayNetwork<T>(T options, String region=null)
+   M static T WithRelayNetwork<T>(T options, RelayNetworkOptions relayOptions)
+   M static T WithDirectNetwork<T>(T options, String listenIp=127.0.0.1, String publishIp=127.0.0.1, Int32 port=0)
+   M static T WithDirectNetwork<T>(T options)
+   M static T WithDirectNetwork<T>(T options, DirectNetworkOptions networkOptions)
+   M static T WithNetworkHandler<T>(T options, INetworkHandler networkHandler)
+   M static T WithNetworkOptions<T>(T options, NetworkOptions networkOptions)
+   M static T WithDistributedAuthorityNetwork<T>(T options, String region=null)
+   M static T WithDistributedAuthorityNetwork<T>(T options, RelayNetworkOptions relayOptions)
+   M static T WithPlayerName<T>(T options, VisibilityPropertyOptions visibility=Member)
+   M static String GetPlayerName(IReadOnlyPlayer player)
+   M static T WithHostMigration<T>(T options, IMigrationDataHandler migrationDataHandler)
+   M static T WithHostMigration<T>(T options, IMigrationDataHandler migrationDataHandler, TimeSpan dataUploadInterval, TimeSpan dataHandlingTimeout)
+== class Unity.Services.Multiplayer.SessionProperty [IValueProperty,IVisibilityProperty]
+   P String Value
+   P VisibilityPropertyOptions Visibility
+   P PropertyIndex Index
+   C (String value, VisibilityPropertyOptions visibility=Public, PropertyIndex index=None)
+== enum Unity.Services.Multiplayer.SessionState : Enum [IFormattable,IComparable,IConvertible]
+   None, Connected, Disconnected, Deleted
+== enum Unity.Services.Multiplayer.SortField : Enum [IFormattable,IComparable,IConvertible]
+   Name, MaxPlayers, AvailableSlots, CreationTime, LastUpdated, Id, StringIndex1, StringIndex2, StringIndex3, StringIndex4, StringIndex5, NumberIndex1, NumberIndex2, NumberIndex3, NumberIndex4, NumberIndex5
+== class Unity.Services.Multiplayer.SortOption
+   P SortOrder Order {get;set;}
+   P SortField Field {get;set;}
+   C (SortOrder order, SortField field)
+   C ()
+== enum Unity.Services.Multiplayer.SortOrder : Enum [IFormattable,IComparable,IConvertible]
+   Ascending, Descending
+== enum Unity.Services.Multiplayer.VisibilityPropertyOptions : Enum [IFormattable,IComparable,IConvertible]
+   Public, Member, Private
+== class Unity.Services.Relay.Http.DeserializationSettings
+   F MissingMemberHandling MissingMemberHandling
+   C ()
+== enum Unity.Services.Relay.Http.MissingMemberHandling : Enum [IFormattable,IComparable,IConvertible]
+   Error, Ignore
+== interface Unity.Services.Relay.IRelayService
+   M Task<Allocation> CreateAllocationAsync(Int32 maxConnections, String region=null)
+   M Task<String> GetJoinCodeAsync(Guid allocationId)
+   M Task<JoinAllocation> JoinAllocationAsync(String joinCode)
+   M Task<List<Region>> ListRegionsAsync()
+== interface Unity.Services.Relay.IRelayServiceSDK [IRelayService]
+== interface Unity.Services.Relay.IRelayServiceSDKConfiguration
+   M Void SetAllocationsServiceBasePath(String basePath)
+== class Unity.Services.Relay.Models.AllocateResponseBody
+   P ResponseMeta Meta
+   P ResponseLinks Links
+   P AllocationData Data
+   C (ResponseMeta meta, AllocationData data, ResponseLinks links=null)
+== class Unity.Services.Relay.Models.Allocation
+   P Guid AllocationId
+   P List<RelayServerEndpoint> ServerEndpoints
+   P RelayServer RelayServer
+   P Byte[] Key
+   P Byte[] ConnectionData
+   P Byte[] AllocationIdBytes
+   P String Region
+   C (Guid allocationId, List<RelayServerEndpoint> serverEndpoints, RelayServer relayServer, Byte[] key, Byte[] connectionData, Byte[] allocationIdBytes, String region)
+== class Unity.Services.Relay.Models.AllocationData
+   P Allocation Allocation
+   C (Allocation allocation)
+== class Unity.Services.Relay.Models.AllocationRequest
+   P Int32 MaxConnections
+   P String Region
+   C (Int32 maxConnections, String region=null)
+== static class Unity.Services.Relay.Models.AllocationUtils
+   M static RelayServerData ToRelayServerData(Allocation allocation, String connectionType)
+   M static RelayServerData ToRelayServerData(JoinAllocation allocation, String connectionType)
+   M static RelayServerData ToRelayServerData(Allocation allocation, RelayProtocol connectionType)
+   M static RelayServerData ToRelayServerData(JoinAllocation allocation, RelayProtocol connectionType)
+== class Unity.Services.Relay.Models.ErrorResponseBody
+   P Int32 Status
+   P String Detail
+   P String Title
+   P List<KeyValuePair> Details
+   P String Type
+   P Int32 Code
+   C (Int32 status, String detail, String title, String type, Int32 code, List<KeyValuePair> details=null)
+== interface Unity.Services.Relay.Models.IOneOf
+   P Type Type
+   P Object Value
+== class Unity.Services.Relay.Models.JoinAllocation
+   P Guid AllocationId
+   P List<RelayServerEndpoint> ServerEndpoints
+   P RelayServer RelayServer
+   P Byte[] Key
+   P Byte[] ConnectionData
+   P Byte[] AllocationIdBytes
+   P String Region
+   P Byte[] HostConnectionData
+   C (Guid allocationId, List<RelayServerEndpoint> serverEndpoints, RelayServer relayServer, Byte[] key, Byte[] connectionData, Byte[] allocationIdBytes, String region, Byte[] hostConnectionData)
+== class Unity.Services.Relay.Models.JoinAllocationAllOf
+   P Byte[] HostConnectionData
+   C (Byte[] hostConnectionData)
+== class Unity.Services.Relay.Models.JoinCodeData
+   P String JoinCode
+   C (String joinCode)
+== class Unity.Services.Relay.Models.JoinCodeRequest
+   P Guid AllocationId
+   C (Guid allocationId)
+== class Unity.Services.Relay.Models.JoinCodeResponseBody
+   P ResponseMeta Meta
+   P ResponseLinks Links
+   P JoinCodeData Data
+   C (ResponseMeta meta, ResponseLinks links, JoinCodeData data)
+== class Unity.Services.Relay.Models.JoinData
+   P JoinAllocation Allocation
+   C (JoinAllocation allocation)
+== class Unity.Services.Relay.Models.JoinRequest
+   P String JoinCode
+   C (String joinCode)
+== class Unity.Services.Relay.Models.JoinResponseBody
+   P ResponseMeta Meta
+   P JoinData Data
+   C (ResponseMeta meta, JoinData data)
+== class Unity.Services.Relay.Models.KeyValuePair
+   P String Key
+   P String Value
+   C (String key, String value)
+== class Unity.Services.Relay.Models.Region
+   P String Id
+   P String Description
+   C (String id, String description)
+== class Unity.Services.Relay.Models.RegionsData
+   P List<Region> Regions
+   C (List<Region> regions)
+== class Unity.Services.Relay.Models.RegionsResponseBody
+   P RegionsData Data
+   C (RegionsData data)
+== class Unity.Services.Relay.Models.RelayServer
+   P String IpV4
+   P Int32 Port
+   C (String ipV4, Int32 port)
+== class Unity.Services.Relay.Models.RelayServerEndpoint
+   P String ConnectionType
+   P NetworkOptions Network
+   P Boolean Reliable
+   P Boolean Secure
+   P String Host
+   P Int32 Port
+   F static String ConnectionTypeUdp
+   F static String ConnectionTypeDtls
+   F static String ConnectionTypeWss
+   C (String connectionType, NetworkOptions network, Boolean reliable, Boolean secure, String host, Int32 port)
+== enum Unity.Services.Relay.Models.RelayServerEndpoint+NetworkOptions : Enum [IFormattable,IComparable,IConvertible]
+   Udp, Tcp
+== class Unity.Services.Relay.Models.ResponseLinks
+   P String Next
+   C (String next=null)
+== class Unity.Services.Relay.Models.ResponseMeta
+   P String RequestId
+   P Int32 Status
+   C (String requestId, Int32 status)
+== enum Unity.Services.Relay.RelayExceptionReason : Enum [IFormattable,IComparable,IConvertible]
+   Min, NoError, InvalidRequest, InactiveProject, RegionNotFound, AllocationNotFound, JoinCodeNotFound, NoSuitableRelay, InvalidArgument, Unauthorized, PaymentRequired, Forbidden, EntityNotFound, MethodNotAllowed, NotAcceptable, ProxyAuthenticationRequired, RequestTimeOut, Conflict, Gone, LengthRequired, PreconditionFailed, RequestEntityTooLarge, RequestUriTooLong, UnsupportedMediaType, RangeNotSatisfiable, ExpectationFailed, Teapot, Misdirected, UnprocessableTransaction, Locked, FailedDependency, TooEarly, UpgradeRequired, PreconditionRequired, RateLimited, RequestHeaderFieldsTooLarge, UnavailableForLegalReasons, InternalServerError, NotImplemented, BadGateway, ServiceUnavailable, GatewayTimeout, HttpVersionNotSupported, VariantAlsoNegotiates, InsufficientStorage, LoopDetected, NotExtended, NetworkAuthenticationRequired, NetworkError, Unknown, Max
+== static class Unity.Services.Relay.RelayService
+   P IRelayService Instance {get;set;}
+== class Unity.Services.Relay.RelayServiceException : RequestFailedException [ISerializable,_Exception]
+   P RelayExceptionReason Reason {get;set;}
+   P ErrorResponseBody ApiError
+   C (RelayExceptionReason reason, String message, Exception innerException)
+   C (RelayExceptionReason reason, String message)
+   C (Int64 errorCode, String message)
+   C (Exception innerException)
+##### Unity.Services.Multiplayer.Editor
+##### Unity.Services.Multiplayer.Editor.Shared
+##### Unity.Services.Multiplayer.Editor.Matchmaker.Authoring.Core
+##### Unity.Services.Multiplayer.Editor.Matchmaker.Authoring
+##### Unity.Services.Vivox
+== static class Unity.Services.Core.VivoxServicesExtensions
+   M static IVivoxService GetVivoxService(IUnityServices unityServices)
+== struct Unity.Services.Vivox.AudioClippingProtectorParameters : ValueType
+   F Single MinimumThresholdDb
+   F Single ThresholdBoostSlope
+   C (Single minimumThresholdDb, Single thresholdBoostSlope)
+== enum Unity.Services.Vivox.AudioFadeModel : Enum [IFormattable,IComparable,IConvertible]
+   InverseByDistance, LinearByDistance, ExponentialByDistance
+== class Unity.Services.Vivox.AudioTaps.VivoxAudioTap : MonoBehaviour
+   P Int32 TapId
+   P Boolean AutoAcquireChannel {get;set;}
+   P String ChannelName {get;set;}
+   P Boolean IsRunning
+== class Unity.Services.Vivox.AudioTaps.VivoxCaptureSourceTap : VivoxAudioTap
+== class Unity.Services.Vivox.AudioTaps.VivoxChannelAudioTap : VivoxAudioTap
+== class Unity.Services.Vivox.AudioTaps.VivoxParticipantTap : VivoxAudioTap
+   P String ParticipantName {get;set;}
+   P Boolean SilenceInChannelAudioMix {get;set;}
+== enum Unity.Services.Vivox.BluetoothProfile : Enum [IFormattable,IComparable,IConvertible]
+   A2DP, HFP
+== class Unity.Services.Vivox.Channel3DProperties
+   P Int32 AudibleDistance
+   P Int32 ConversationalDistance
+   P Single AudioFadeIntensityByDistance
+   P AudioFadeModel AudioFadeModel
+   C ()
+   C (Int32 audibleDistance, Int32 conversationalDistance, Single audioFadeIntensityByDistanceaudio, AudioFadeModel audioFadeModel)
+   M String ToString()
+== class Unity.Services.Vivox.ChannelOptions
+   P Boolean MakeActiveChannelUponJoining {get;set;}
+   P Boolean IsLargeText {get;set;}
+   C ()
+== enum Unity.Services.Vivox.ChatCapability : Enum [IFormattable,IComparable,IConvertible]
+   TextOnly, AudioOnly, TextAndAudio
+== class Unity.Services.Vivox.ChatHistoryQueryOptions
+   P String SearchText {get;set;}
+   P Nullable<DateTime> TimeStart {get;set;}
+   P Nullable<DateTime> TimeEnd {get;set;}
+   P String PlayerId {get;set;}
+   C ()
+== class Unity.Services.Vivox.ConversationQueryOptions
+   P Int32 PageCursor {get;set;}
+   P Nullable<DateTime> CutoffTime {get;set;}
+   P Int32 PageSize {get;set;}
+   C ()
+== enum Unity.Services.Vivox.ConversationType : Enum [IFormattable,IComparable,IConvertible]
+   ChannelConversation, DirectedMessageConversation
+== static class Unity.Services.Vivox.InitializationOptionsExtensions
+   M static InitializationOptions SetVivoxCredentials(InitializationOptions self, String server, String domain, String issuer, String tokenKey=)
+== enum Unity.Services.Vivox.IosVoiceProcessingIOModes : Enum [IFormattable,IComparable,IConvertible]
+   Never, OnSpeakerPhone, Always, ErrorOccurred
+== interface Unity.Services.Vivox.IVivoxGlobalAudioSettings
+   P Boolean NoiseSuppressionEnabled {get;set;}
+   P Boolean PlatformAcousticEchoCancellationEnabled {get;set;}
+   P Boolean VivoxAcousticEchoCancellationEnabled {get;set;}
+   P Boolean AutomaticGainControlEnabled {get;set;}
+   P Boolean DynamicVoiceProcessingSwitchingEnabled {get;set;}
+   P Boolean VolumeBasedDuplicationSuppressionEnabled {get;set;}
+   P Boolean PositionalChannelVolumeProtectionEnabled {get;set;}
+   P Boolean AudioClippingProtectorEnabled {get;set;}
+   P AudioClippingProtectorParameters AudioClippingProtectorParameters {get;set;}
+== interface Unity.Services.Vivox.IVivoxService
+   P VivoxInitializationState InitializationState
+   P IVivoxGlobalAudioSettings VivoxGlobalAudioSettings
+   P Boolean IsLoggedIn
+   P String SignedInPlayerId
+   P ReadOnlyCollection<String> TextToSpeechAvailableVoices
+   P String TextToSpeechCurrentVoice
+   P ReadOnlyDictionary<String,ReadOnlyCollection<VivoxParticipant>> ActiveChannels
+   P ReadOnlyCollection<String> TransmittingChannels
+   P ReadOnlyCollection<VivoxInputDevice> AvailableInputDevices
+   P ReadOnlyCollection<VivoxOutputDevice> AvailableOutputDevices
+   P VivoxInputDevice ActiveInputDevice
+   P VivoxInputDevice EffectiveInputDevice
+   P VivoxOutputDevice ActiveOutputDevice
+   P VivoxOutputDevice EffectiveOutputDevice
+   P Int32 InputDeviceVolume
+   P Int32 OutputDeviceVolume
+   P Boolean IsInputDeviceMuted
+   P Boolean IsOutputDeviceMuted
+   P Boolean IsAudioEchoCancellationEnabled
+   P Boolean IsInjectingAudio
+   P IosVoiceProcessingIOModes IosVoiceProcessingIOMode
+   E Action Initialized
+   E Action<Exception> InitializationFailed
+   E Action LoggedIn
+   E Action LoggedOut
+   E Action AvailableInputDevicesChanged
+   E Action EffectiveInputDeviceChanged
+   E Action AvailableOutputDevicesChanged
+   E Action EffectiveOutputDeviceChanged
+   E Action ConnectionRecovering
+   E Action ConnectionRecovered
+   E Action ConnectionFailedToRecover
+   E Action<String> ChannelJoined
+   E Action<String> ChannelLeft
+   E Action<VivoxParticipant> ParticipantAddedToChannel
+   E Action<VivoxParticipant> ParticipantRemovedFromChannel
+   E Action<VivoxMessage> ChannelMessageReceived
+   E Action<VivoxMessage> ChannelMessageEdited
+   E Action<VivoxMessage> ChannelMessageDeleted
+   E Action<VivoxMessage> DirectedMessageReceived
+   E Action<VivoxMessage> DirectedMessageDeleted
+   E Action<VivoxMessage> DirectedMessageEdited
+   E Action<VivoxMessage> SpeechToTextMessageReceived
+   M Task InitializeAsync(VivoxConfigurationOptions options=null)
+   M Void Uninitialize()
+   M Task LoginAsync(LoginOptions options=null)
+   M Task LogoutAsync()
+   M Task JoinGroupChannelAsync(String channelName, ChatCapability chatCapability, ChannelOptions channelOptions=null)
+   M Task JoinPositionalChannelAsync(String channelName, ChatCapability chatCapability, Channel3DProperties positionalChannelProperties, ChannelOptions channelOptions=null)
+   M Task JoinEchoChannelAsync(String channelName, ChatCapability chatCapability, ChannelOptions channelOptions=null)
+   M Task LeaveAllChannelsAsync()
+   M Task LeaveChannelAsync(String channelName)
+   M Void EnableAcousticEchoCancellation()
+   M Void DisableAcousticEchoCancellation()
+   M Void SetIosVoiceProcessingIOMode(IosVoiceProcessingIOModes IOSVoiceProcessingIOMode)
+   M Task SetActiveInputDeviceAsync(VivoxInputDevice device)
+   M Task SetActiveOutputDeviceAsync(VivoxOutputDevice device)
+   M Void SetInputDeviceVolume(Int32 value)
+   M Void SetOutputDeviceVolume(Int32 value)
+   M Task SetChannelVolumeAsync(String channelName, Int32 value)
+   M Task EnableAutoVoiceActivityDetectionAsync()
+   M Task DisableAutoVoiceActivityDetectionAsync()
+   M Task SetVoiceActivityDetectionPropertiesAsync(Int32 hangover=2000, Int32 noiseFloor=576, Int32 sensitivity=43)
+   M Task<Boolean> SetSafeVoiceConsentStatus(Boolean consentGiven)
+   M Task<Boolean> GetSafeVoiceConsentStatus()
+   M Void MuteInputDevice()
+   M Void UnmuteInputDevice()
+   M Void MuteOutputDevice()
+   M Void UnmuteOutputDevice()
+   M Task BlockPlayerAsync(String playerId)
+   M Task UnblockPlayerAsync(String playerId)
+   M Task SendChannelTextMessageAsync(String channelName, String message, MessageOptions options=null)
+   M Task EditChannelTextMessageAsync(String channelName, String messageId, String newMessage)
+   M Task DeleteChannelTextMessageAsync(String channelName, String messageId)
+   M Task SendDirectTextMessageAsync(String playerId, String message, MessageOptions options=null)
+   M Task EditDirectTextMessageAsync(String messageId, String newMessage)
+   M Task DeleteDirectTextMessageAsync(String messageId)
+   M Void StartAudioInjection(String audioFilePath)
+   M Void StopAudioInjection()
+   M Task SpeechToTextEnableTranscription(String channelName)
+   M Task SpeechToTextDisableTranscription(String channelName)
+   M Boolean IsSpeechToTextEnabled(String channelName)
+   M Void TextToSpeechSendMessage(String message, TextToSpeechMessageType messageType)
+   M Void TextToSpeechCancelAllMessages()
+   M Void TextToSpeechCancelMessages(TextToSpeechMessageType messageType)
+   M Void TextToSpeechSetVoice(String voiceName)
+   M Task<ReadOnlyCollection<VivoxMessage>> GetChannelTextMessageHistoryAsync(String channelName, Int32 requestSize=10, ChatHistoryQueryOptions chatHistoryQueryOptions=null)
+   M Task<ReadOnlyCollection<VivoxMessage>> GetDirectTextMessageHistoryAsync(String playerId=null, Int32 requestSize=10, ChatHistoryQueryOptions chatHistoryQueryOptions=null)
+   M Task SetMessageAsReadAsync(VivoxMessage message, Nullable<DateTime> seenAt=null)
+   M Task<ReadOnlyCollection<VivoxConversation>> GetConversationsAsync(ConversationQueryOptions options=null)
+   M Void Set3DPosition(GameObject participantObject, String channelName, Boolean allowPanning=True)
+   M Void Set3DPosition(Vector3 speakerPos, Vector3 listenerPos, Vector3 listenerAtOrient, Vector3 listenerUpOrient, String channelName, Boolean allowPanning=True)
+   M Task SetChannelTransmissionModeAsync(TransmissionMode transmissionMode, String channelName=null)
+   M Void SetTokenProvider(IVivoxTokenProvider tokenProvider)
+== interface Unity.Services.Vivox.IVivoxTokenProvider
+   M Task<String> GetTokenAsync(String issuer=null, Nullable<TimeSpan> expiration=null, String targetUserUri=null, String action=null, String channelUri=null, String fromUserUri=null, String realm=null)
+== class Unity.Services.Vivox.LoginOptions
+   P String PlayerId {get;set;}
+   P String DisplayName {get;set;}
+   P Boolean EnableTTS {get;set;}
+   P List<String> BlockedUserList {get;set;}
+   P ParticipantPropertyUpdateFrequency ParticipantUpdateFrequency {get;set;}
+   P List<String> SpeechToTextLanguages {get;set;}
+   C ()
+== class Unity.Services.Vivox.MessageOptions
+   P String Language {get;set;}
+   P String Metadata {get;set;}
+   C ()
+== class Unity.Services.Vivox.MintException : RequestFailedException [ISerializable,_Exception]
+   P String Detail
+   P Nullable<DateTime> ExpiresAt
+   P MintExceptionCode ExceptionCode
+== enum Unity.Services.Vivox.MintExceptionCode : Enum [IFormattable,IComparable,IConvertible]
+   Unauthorized, FailedToDecodeToken, ServiceDeprecated
+== enum Unity.Services.Vivox.ParticipantPropertyUpdateFrequency : Enum [IFormattable,IComparable,IConvertible]
+   Never, TenPerSecond, FivePerSecond, OnePerSecond, StateChange
+== enum Unity.Services.Vivox.TextToSpeechMessageType : Enum [IFormattable,IComparable,IConvertible]
+   RemoteTransmission, LocalPlayback, RemoteTransmissionWithLocalPlayback, QueuedRemoteTransmission, QueuedLocalPlayback, QueuedRemoteTransmissionWithLocalPlayback, ScreenReader
+== enum Unity.Services.Vivox.TransmissionMode : Enum [IFormattable,IComparable,IConvertible]
+   None, Single, All
+== class Unity.Services.Vivox.VivoxApiException : Exception [ISerializable,_Exception]
+   P Int32 StatusCode {get;set;}
+   P String RequestId {get;set;}
+== class Unity.Services.Vivox.VivoxConfigurationOptions
+   P Int32 RenderSourceQueueDepthMax {get;set;}
+   P Int32 RenderSourceInitialBufferCount {get;set;}
+   P Int32 UpstreamJitterFrameCount {get;set;}
+   P Int32 MaxLoginsPerUser {get;set;}
+   P VivoxLogLevel LogLevel {get;set;}
+   P Boolean DisableDevicePolling {get;set;}
+   P Boolean ForceCaptureSilence {get;set;}
+   P Boolean EnableAdvancedAutoLevels {get;set;}
+   P Int32 CaptureDeviceBufferSizeIntervals {get;set;}
+   P Int32 RenderDeviceBufferSizeIntervals {get;set;}
+   P Boolean DisableAudioDucking {get;set;}
+   P Boolean EnableDtx {get;set;}
+   P Boolean EnableFastNetworkChangeDetection {get;set;}
+   P Int32 UseOsProxySettings {get;set;}
+   P Boolean DynamicVoiceProcessingSwitching {get;set;}
+   P Boolean MobileRecordingConflictAvoidance {get;set;}
+   P Int32 NeverRtpTimeoutMs {get;set;}
+   P Int32 LostRtpTimeoutMs {get;set;}
+   P BluetoothProfile BluetoothProfile {get;set;}
+   P IosVoiceProcessingIOModes IosVoiceProcessingMode {get;set;}
+   P Boolean SkipPrepareForVivox {get;set;}
+   C ()
+== class Unity.Services.Vivox.VivoxConversation
+   P String Name
+   P ConversationType ConversationType
+== enum Unity.Services.Vivox.VivoxInitializationState : Enum [IFormattable,IComparable,IConvertible]
+   Uninitialized, Initializing, Initialized, Failed
+== class Unity.Services.Vivox.VivoxInputDevice [IVivoxAudioDevice]
+   P String DeviceName
+   P String DeviceID
+   M Task SetActiveDeviceAsync()
+== enum Unity.Services.Vivox.VivoxLogLevel : Enum [IFormattable,IComparable,IConvertible]
+   Error, Warning, Info, Debug, Trace, All, None
+== class Unity.Services.Vivox.VivoxMessage
+   P String SenderPlayerId {get;set;}
+   P String SenderDisplayName {get;set;}
+   P String RecipientPlayerId {get;set;}
+   P String ChannelName {get;set;}
+   P String MessageText {get;set;}
+   P Boolean FromSelf {get;set;}
+   P DateTime ReceivedTime {get;set;}
+   P String Language {get;set;}
+   P String MessageId {get;set;}
+   P Boolean IsRead {get;set;}
+   P Boolean IsTranscribedMessage {get;set;}
+   P String Metadata {get;set;}
+   M Task SetMessageAsReadAsync(Nullable<DateTime> seenAt=null)
+== class Unity.Services.Vivox.VivoxObserver [IDisposable]
+   P Boolean IsServiceInitialized
+   P Boolean IsLoggedIn
+   P Boolean IsInTargetChannel
+   P IVivoxService VivoxService {get;set;}
+   E Action ServiceInitialized
+   E Action<Exception> ServiceInitializationFailed
+   E Action LoggedIn
+   E Action LoggedOut
+   E Action<String> ChannelJoined
+   E Action<String> ChannelLeft
+   E Action<VivoxParticipant> ParticipantJoined
+   E Action<VivoxParticipant> ParticipantLeft
+   E Action<VivoxMessage> ChannelMessageReceived
+   E Action<VivoxMessage> ChannelMessageEdited
+   E Action<VivoxMessage> ChannelMessageDeleted
+   E Action<VivoxMessage> DirectMessageReceived
+   E Action<VivoxMessage> DirectMessageEdited
+   E Action<VivoxMessage> DirectMessageDeleted
+   E Action AvailableInputDevicesChanged
+   E Action EffectiveInputDeviceChanged
+   E Action AvailableOutputDevicesChanged
+   E Action EffectiveOutputDeviceChanged
+   F VivoxObserverType ObserverType
+   F String TargetChannelName
+   C (VivoxObserverType observerType, String targetChannelName, IUnityServices registry)
+   C (VivoxObserverType observerType, String targetChannelName=null)
+   M Void Dispose()
+== enum Unity.Services.Vivox.VivoxObserverType : Enum [IFormattable,IComparable,IConvertible]
+   None, Login, Channel, ChannelMessages, DirectMessages, AudioDevices, All
+== class Unity.Services.Vivox.VivoxOutputDevice [IVivoxAudioDevice]
+   P String DeviceName
+   P String DeviceID
+   M Task SetActiveDeviceAsync()
+== class Unity.Services.Vivox.VivoxParticipant
+   P String DisplayName
+   P String PlayerId
+   P String URI
+   P String ChannelName
+   P String ChannelURI
+   P Boolean SpeechDetected
+   P Boolean IsMuted
+   P Boolean IsSelf
+   P Boolean IsInAudio
+   P Boolean IsInText
+   P Int32 LocalVolume
+   P Double AudioEnergy
+   P AudioSource ParticipantTapAudioSource {get;set;}
+   E Action ParticipantMuteStateChanged
+   E Action ParticipantSpeechDetected
+   E Action ParticipantAudioEnergyChanged
+   E Action ParticipantAudioStateChanged
+   E Action ParticipantTextStateChanged
+   M Void SetLocalVolume(Int32 volume)
+   M Void MutePlayerLocally()
+   M Void UnmutePlayerLocally()
+   M GameObject CreateVivoxParticipantTap(String gameObjectName=, Boolean silenceInChannelAudioMix=True)
+   M Void DestroyVivoxParticipantTap()
+== static class Unity.Services.Vivox.VivoxService
+   P IVivoxService Instance {get;set;}
+##### Unity.Services.Vivox.Editor

@@ -1,0 +1,9 @@
+GameFont.ttf = Poppins Bold
+Copyright 2020 The Poppins Project Authors (https://github.com/itfoundry/Poppins)
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+The full license text is available at: https://openfontlicense.org
+
+Summary: the font may be used, studied, modified and redistributed freely
+(including bundled with software / games), as long as it is not sold by itself
+and this copyright + license notice is kept with it.

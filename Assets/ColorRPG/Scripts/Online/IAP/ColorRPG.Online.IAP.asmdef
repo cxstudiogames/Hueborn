@@ -1,0 +1,19 @@
+{
+    "name": "ColorRPG.Online.IAP",
+    "rootNamespace": "ColorRPG.Net",
+    "references": [
+        "Unity.Services.Core",
+        "Unity.Purchasing"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        { "name": "com.unity.purchasing", "expression": "5.0.0", "define": "CRPG_IAP" }
+    ],
+    "noEngineReferences": false
+}

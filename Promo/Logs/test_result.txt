@@ -1,0 +1,12 @@
+time: 02/10/2026 00:28:16
+UGS installed: True  ready: True  name: Ionutcx#13744  id: Stshxoe7bkzjHgH6L7Y0ZJZY53Od
+UGS last error: Leaderboard config could not be found
+top[0]: null  myRank: 0
+top[1]: null  myRank: 0
+player: Lv 100  power 193775  map 0
+---- log (5) ----
+[Log] [ColorRPG] Online: signed in as Ionutcx#13744 (Stshxoe7bkzjHgH6L7Y0ZJZY53Od)
+[Warning] [ColorRPG] Leaderboard power: Leaderboard config could not be found
+[Warning] [ColorRPG] Leaderboard playtime: Leaderboard config could not be found
+[Warning] [ColorRPG] Leaderboard playtime: Leaderboard config could not be found
+[Warning] [ColorRPG] Leaderboard power: Leaderboard config could not be found

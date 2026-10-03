@@ -1,0 +1,84 @@
+time: 03/10/2026 18:25:42  (Editor - valorile reale pe telefon sunt mai mari la timp, la fel la draw calls)
+
+--- SETTINGS ---
+Quality level: PC (PC)
+targetFrameRate 60 vSync 0 | screen 1613x765
+URP asset: PC_RPAsset | renderScale 1 | HDR True | MSAA 1 | SRP Batcher True
+shadows: distance 65 cascades 2 mainRes 2048 soft True | addLights PerPixel perObject 4 addShadows True
+depthTex False opaqueTex False
+renderer PC_Renderer path ForwardPlus features 1
+camera far 400 | postFX True AA FastApproximateAntialiasing | cameras in scene 3
+volume Global Volume: Tonemapping, Bloom, Vignette
+volume ColorRPG_Volume: Bloom, ColorAdjustments, WhiteBalance, ShadowsMidtonesHighlights, Vignette, Tonemapping
+fog True | physics fixedDt 0.01999999
+
+=== Meadow Fields ===
+  draw calls avg 0 max 0 | SetPass avg 65 | batches avg 0
+  triangles avg 657010 max 657023 | vertices avg 956721
+  GC alloc/frame avg 10705 B, max 19376 B, allocations/frame avg 265
+  main thread avg 17.20 ms (max 26.36) | render thread avg 0.00 ms
+  lights active 4 (point 3, shadows 1)
+  renderers 1123 (shadow casters 394, particle systems 8) | unique materials 261 (alpha clip 5, transparent 20)
+  shaders: ColorRPG/Surface x199, Universal Render Pipeline/Lit x42, Universal Render Pipeline/Unlit x19, Universal Render Pipeline/Particles/Unlit x1
+  scene triangles (active, before culling) 6077379 | of which shadow casters 633524
+  top meshes: Combined Mesh (root: scene) 7 3842k (x94), Combined Mesh (root: scene) 8 1117k (x49), Combined Mesh (root: scene) 5 444k (x146), Combined Mesh (root: scene) 6 302k (x87), RockPath_Round_Small_2 47k (x42), RockPath_Round_Small_1 38k (x39), RockPath_Round_Small_3 36k (x36), RockPath_Square_Small_1 27k (x35), RockPath_Square_Small_3 26k (x47), Combined Mesh (root: scene) 14 22k (x22), RockPath_Square_Small_2 21k (x39), LowSphere 18k (x69), CommonTree_2 11k (x2), CommonTree_3 10k (x3)
+  renderers with MaterialPropertyBlock 9
+  colliders 256 | rigidbodies 0 | MonoBehaviours 741 | canvases 3
+  most scripts: Shadow x110, Outline x107, Text x107, Enemy x88, Image x84, Obstacle x59, Spinner x34, WorldLabel x26, Button x23, SimpleAnimator x16, Interactable x11, FireFx x7
+
+=== Sunny Desert ===
+  draw calls avg 0 max 0 | SetPass avg 59 | batches avg 0
+  triangles avg 677944 max 677963 | vertices avg 889083
+  GC alloc/frame avg 10851 B, max 39240 B, allocations/frame avg 266
+  main thread avg 16.83 ms (max 29.10) | render thread avg 0.00 ms
+  lights active 4 (point 3, shadows 1)
+  renderers 1176 (shadow casters 412, particle systems 6) | unique materials 266 (alpha clip 4, transparent 7)
+  shaders: ColorRPG/Surface x221, Universal Render Pipeline/Lit x38, Universal Render Pipeline/Unlit x6, Universal Render Pipeline/Particles/Unlit x1
+  scene triangles (active, before culling) 370252 | of which shadow casters 132174
+  top meshes: LowSphere 54k (x205), RockPath_Round_Small_2 31k (x28), TwistedTree_4 28k (x3), RockPath_Round_Small_1 26k (x27), RockPath_Square_Small_1 26k (x34), RockPath_Round_Small_3 25k (x25), LowCapsule 24k (x168), RockPath_Square_Small_3 15k (x28), Grass_Wispy_Tall 14k (x23), RockPath_Square_Small_2 13k (x25), DeadTree_1 12k (x2), DeadTree_3 11k (x2), DeadTree_5 11k (x2), Cylinder 10k (x130)
+  renderers with MaterialPropertyBlock 7
+  colliders 229 | rigidbodies 0 | MonoBehaviours 500 | canvases 1
+  most scripts: Enemy x88, Obstacle x76, Image x56, Shadow x45, Text x42, Outline x42, SimpleAnimator x25, Button x23, WorldLabel x18, Spinner x14, FireFx x6, Interactable x5
+
+=== Frozen Peaks ===
+  draw calls avg 0 max 0 | SetPass avg 58 | batches avg 0
+  triangles avg 420385 max 420653 | vertices avg 580808
+  GC alloc/frame avg 10864 B, max 38847 B, allocations/frame avg 266
+  main thread avg 16.85 ms (max 26.27) | render thread avg 0.00 ms
+  lights active 4 (point 3, shadows 1)
+  renderers 673 (shadow casters 238, particle systems 6) | unique materials 202 (alpha clip 5, transparent 8)
+  shaders: ColorRPG/Surface x164, Universal Render Pipeline/Lit x30, Universal Render Pipeline/Unlit x7, Universal Render Pipeline/Particles/Unlit x1
+  scene triangles (active, before culling) 247064 | of which shadow casters 101835
+  top meshes: RockPath_Round_Small_2 34k (x31), RockPath_Round_Small_1 25k (x26), RockPath_Round_Small_3 24k (x24), Pine_3 14k (x3), Rock_Medium_3 12k (x24), RockPath_Square_Small_3 12k (x22), Pine_1 11k (x3), RockPath_Square_Small_1 11k (x15), Pine_4 10k (x3), RockPath_Square_Small_2 10k (x18), Cylinder 9k (x117), LowSphere 7k (x27), Pine_5 6k (x4), Grass_Wispy_Tall 4k (x8)
+  renderers with MaterialPropertyBlock 7
+  colliders 189 | rigidbodies 0 | MonoBehaviours 478 | canvases 1
+  most scripts: Enemy x88, Obstacle x66, Image x56, Shadow x44, Text x41, Outline x41, SimpleAnimator x24, Button x23, WorldLabel x17, Spinner x13, Interactable x4, UniversalAdditionalCameraData x3
+
+=== Lava Volcano ===
+  draw calls avg 0 max 0 | SetPass avg 55 | batches avg 0
+  triangles avg 455294 max 456097 | vertices avg 637596
+  GC alloc/frame avg 10583 B, max 20499 B, allocations/frame avg 264
+  main thread avg 16.83 ms (max 26.49) | render thread avg 0.00 ms
+  lights active 4 (point 3, shadows 1)
+  renderers 784 (shadow casters 309, particle systems 6) | unique materials 216 (alpha clip 1, transparent 7)
+  shaders: ColorRPG/Surface x174, Universal Render Pipeline/Lit x35, Universal Render Pipeline/Unlit x6, Universal Render Pipeline/Particles/Unlit x1
+  scene triangles (active, before culling) 253456 | of which shadow casters 93387
+  top meshes: DeadTree_5 33k (x6), RockPath_Round_Small_3 29k (x29), RockPath_Round_Small_1 27k (x28), RockPath_Round_Small_2 27k (x24), LowSphere 19k (x73), RockPath_Square_Small_2 19k (x34), RockPath_Square_Small_3 17k (x31), RockPath_Square_Small_1 16k (x21), Cylinder 11k (x147), Rock_Medium_3 9k (x19), Rock_Medium_1 6k (x19), Rock_Medium_2 4k (x18), Grass_Wispy_Tall 4k (x7), body 3k (x11)
+  renderers with MaterialPropertyBlock 7
+  colliders 198 | rigidbodies 0 | MonoBehaviours 477 | canvases 1
+  most scripts: Enemy x88, Obstacle x60, Image x56, Shadow x45, Text x42, Outline x42, Button x23, WorldLabel x18, SimpleAnimator x16, Spinner x14, FireFx x8, Interactable x5
+
+=== Trade Plaza ===
+  draw calls avg 0 max 0 | SetPass avg 59 | batches avg 0
+  triangles avg 339436 max 339471 | vertices avg 435344
+  GC alloc/frame avg 10469 B, max 19893 B, allocations/frame avg 264
+  main thread avg 16.83 ms (max 25.25) | render thread avg 0.00 ms
+  lights active 4 (point 3, shadows 1)
+  renderers 1317 (shadow casters 314, particle systems 8) | unique materials 132 (alpha clip 5, transparent 7)
+  shaders: ColorRPG/Surface x103, Universal Render Pipeline/Lit x22, Universal Render Pipeline/Unlit x6, Universal Render Pipeline/Particles/Unlit x1
+  scene triangles (active, before culling) 263269 | of which shadow casters 140233
+  top meshes: LowSphere 60k (x229), CommonTree_1 31k (x5), Bush_Common_Flowers 21k (x16), CommonTree_2 16k (x3), Bush_Common 16k (x18), CommonTree_5 15k (x5), Cylinder 8k (x111), Cube 8k (x694), CommonTree_4 8k (x2), RockPath_Round_Small_2 7k (x7), RockPath_Round_Small_3 7k (x7), RockPath_Round_Small_1 6k (x7), Flower_4_Group 6k (x4), RockPath_Square_Small_1 5k (x7)
+  renderers with MaterialPropertyBlock 9
+  colliders 178 | rigidbodies 0 | MonoBehaviours 471 | canvases 1
+  most scripts: Enemy x88, Image x53, Shadow x51, Text x48, Outline x48, Obstacle x37, Button x21, Shopper x17, WorldLabel x15, Interactable x12, Spinner x11, BoothSlot x10
+

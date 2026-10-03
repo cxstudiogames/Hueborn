@@ -1,0 +1,13 @@
+time: 03/10/2026 13:41:56
+UGS installed: True  ready: True  name: Ionutcx#21366  id: Stshxoe7bkzjHgH6L7Y0ZJZY53Od
+UGS last error: 
+top[0]: 6 entries  myRank: 1
+top[1]: 6 entries  myRank: 1
+player: Lv 100  power 36050  map 0
+MP installed: True  online: True  active: True  loc: m0  host: True  players: 1  err: 
+Global chat ready: True  err: 
+---- log (4) ----
+[Log] [ColorRPG] Online: signed in as Ionutcx#21366 (Stshxoe7bkzjHgH6L7Y0ZJZY53Od)
+[Log] [ColorRPG] Store ready: 18 products
+[Log] [ColorRPG] Global chat ready
+[Log] [ColorRPG] Multiplayer: joined m0 (1/4) as HOST

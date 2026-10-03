@@ -1,0 +1,6 @@
+time: 02/10/2026 11:39:14
+files: Assets/ColorRPG/Services/playtime.lb, Assets/ColorRPG/Services/power.lb
+items: 2
+ - playtime.lb  Deployed    Success
+ - power.lb  Deployed    Success
+deployed: 2

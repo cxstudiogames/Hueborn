@@ -1,0 +1,23 @@
+{
+    "name": "ColorRPG.Online.UGS",
+    "rootNamespace": "ColorRPG.Net",
+    "references": [
+        "Unity.Services.Core",
+        "Unity.Services.Authentication",
+        "Unity.Services.CloudSave",
+        "Unity.Services.Leaderboards"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        { "name": "com.unity.services.authentication", "expression": "3.0.0", "define": "CRPG_UGS_AUTH" },
+        { "name": "com.unity.services.cloudsave", "expression": "3.0.0", "define": "CRPG_UGS_SAVE" },
+        { "name": "com.unity.services.leaderboards", "expression": "2.0.0", "define": "CRPG_UGS_LB" }
+    ],
+    "noEngineReferences": false
+}

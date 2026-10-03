@@ -1,0 +1,291 @@
+##### Unity.Services.Vivox
+== static class Unity.Services.Core.VivoxServicesExtensions
+   M static IVivoxService GetVivoxService(IUnityServices unityServices)
+== struct Unity.Services.Vivox.AudioClippingProtectorParameters
+   C (Single minimumThresholdDb, Single thresholdBoostSlope)
+== enum Unity.Services.Vivox.AudioFadeModel
+   InverseByDistance, LinearByDistance, ExponentialByDistance
+== class Unity.Services.Vivox.AudioTaps.VivoxAudioTap
+   P Int32 TapId
+   P Boolean AutoAcquireChannel
+   P String ChannelName
+   P Boolean IsRunning
+== class Unity.Services.Vivox.AudioTaps.VivoxCaptureSourceTap
+== class Unity.Services.Vivox.AudioTaps.VivoxChannelAudioTap
+== class Unity.Services.Vivox.AudioTaps.VivoxParticipantTap
+   P String ParticipantName
+   P Boolean SilenceInChannelAudioMix
+== enum Unity.Services.Vivox.BluetoothProfile
+   A2DP, HFP
+== class Unity.Services.Vivox.Channel3DProperties
+   P Int32 AudibleDistance
+   P Int32 ConversationalDistance
+   P Single AudioFadeIntensityByDistance
+   P AudioFadeModel AudioFadeModel
+   M String ToString()
+   C ()
+   C (Int32 audibleDistance, Int32 conversationalDistance, Single audioFadeIntensityByDistanceaudio, AudioFadeModel audioFadeModel)
+== class Unity.Services.Vivox.ChannelOptions
+   P Boolean MakeActiveChannelUponJoining
+   P Boolean IsLargeText
+   C ()
+== enum Unity.Services.Vivox.ChatCapability
+   TextOnly, AudioOnly, TextAndAudio
+== class Unity.Services.Vivox.ChatHistoryQueryOptions
+   P String SearchText
+   P Nullable<DateTime> TimeStart
+   P Nullable<DateTime> TimeEnd
+   P String PlayerId
+   C ()
+== class Unity.Services.Vivox.ConversationQueryOptions
+   P Int32 PageCursor
+   P Nullable<DateTime> CutoffTime
+   P Int32 PageSize
+   C ()
+== enum Unity.Services.Vivox.ConversationType
+   ChannelConversation, DirectedMessageConversation
+== static class Unity.Services.Vivox.InitializationOptionsExtensions
+   M static InitializationOptions SetVivoxCredentials(InitializationOptions self, String server, String domain, String issuer, String tokenKey=)
+== enum Unity.Services.Vivox.IosVoiceProcessingIOModes
+   Never, OnSpeakerPhone, Always, ErrorOccurred
+== interface Unity.Services.Vivox.IVivoxGlobalAudioSettings
+   P Boolean NoiseSuppressionEnabled
+   P Boolean PlatformAcousticEchoCancellationEnabled
+   P Boolean VivoxAcousticEchoCancellationEnabled
+   P Boolean AutomaticGainControlEnabled
+   P Boolean DynamicVoiceProcessingSwitchingEnabled
+   P Boolean VolumeBasedDuplicationSuppressionEnabled
+   P Boolean PositionalChannelVolumeProtectionEnabled
+   P Boolean AudioClippingProtectorEnabled
+   P AudioClippingProtectorParameters AudioClippingProtectorParameters
+== interface Unity.Services.Vivox.IVivoxService
+   P VivoxInitializationState InitializationState
+   P IVivoxGlobalAudioSettings VivoxGlobalAudioSettings
+   P Boolean IsLoggedIn
+   P String SignedInPlayerId
+   P ReadOnlyCollection<String> TextToSpeechAvailableVoices
+   P String TextToSpeechCurrentVoice
+   P ReadOnlyDictionary<String,ReadOnlyCollection<VivoxParticipant>> ActiveChannels
+   P ReadOnlyCollection<String> TransmittingChannels
+   P ReadOnlyCollection<VivoxInputDevice> AvailableInputDevices
+   P ReadOnlyCollection<VivoxOutputDevice> AvailableOutputDevices
+   P VivoxInputDevice ActiveInputDevice
+   P VivoxInputDevice EffectiveInputDevice
+   P VivoxOutputDevice ActiveOutputDevice
+   P VivoxOutputDevice EffectiveOutputDevice
+   P Int32 InputDeviceVolume
+   P Int32 OutputDeviceVolume
+   P Boolean IsInputDeviceMuted
+   P Boolean IsOutputDeviceMuted
+   P Boolean IsAudioEchoCancellationEnabled
+   P Boolean IsInjectingAudio
+   P IosVoiceProcessingIOModes IosVoiceProcessingIOMode
+   E Action Initialized
+   E Action<Exception> InitializationFailed
+   E Action LoggedIn
+   E Action LoggedOut
+   E Action AvailableInputDevicesChanged
+   E Action EffectiveInputDeviceChanged
+   E Action AvailableOutputDevicesChanged
+   E Action EffectiveOutputDeviceChanged
+   E Action ConnectionRecovering
+   E Action ConnectionRecovered
+   E Action ConnectionFailedToRecover
+   E Action<String> ChannelJoined
+   E Action<String> ChannelLeft
+   E Action<VivoxParticipant> ParticipantAddedToChannel
+   E Action<VivoxParticipant> ParticipantRemovedFromChannel
+   E Action<VivoxMessage> ChannelMessageReceived
+   E Action<VivoxMessage> ChannelMessageEdited
+   E Action<VivoxMessage> ChannelMessageDeleted
+   E Action<VivoxMessage> DirectedMessageReceived
+   E Action<VivoxMessage> DirectedMessageDeleted
+   E Action<VivoxMessage> DirectedMessageEdited
+   E Action<VivoxMessage> SpeechToTextMessageReceived
+   M Task InitializeAsync(VivoxConfigurationOptions options=null)
+   M Void Uninitialize()
+   M Task LoginAsync(LoginOptions options=null)
+   M Task LogoutAsync()
+   M Task JoinGroupChannelAsync(String channelName, ChatCapability chatCapability, ChannelOptions channelOptions=null)
+   M Task JoinPositionalChannelAsync(String channelName, ChatCapability chatCapability, Channel3DProperties positionalChannelProperties, ChannelOptions channelOptions=null)
+   M Task JoinEchoChannelAsync(String channelName, ChatCapability chatCapability, ChannelOptions channelOptions=null)
+   M Task LeaveAllChannelsAsync()
+   M Task LeaveChannelAsync(String channelName)
+   M Void EnableAcousticEchoCancellation()
+   M Void DisableAcousticEchoCancellation()
+   M Void SetIosVoiceProcessingIOMode(IosVoiceProcessingIOModes IOSVoiceProcessingIOMode)
+   M Task SetActiveInputDeviceAsync(VivoxInputDevice device)
+   M Task SetActiveOutputDeviceAsync(VivoxOutputDevice device)
+   M Void SetInputDeviceVolume(Int32 value)
+   M Void SetOutputDeviceVolume(Int32 value)
+   M Task SetChannelVolumeAsync(String channelName, Int32 value)
+   M Task EnableAutoVoiceActivityDetectionAsync()
+   M Task DisableAutoVoiceActivityDetectionAsync()
+   M Task SetVoiceActivityDetectionPropertiesAsync(Int32 hangover=2000, Int32 noiseFloor=576, Int32 sensitivity=43)
+   M Task<Boolean> SetSafeVoiceConsentStatus(Boolean consentGiven)
+   M Task<Boolean> GetSafeVoiceConsentStatus()
+   M Void MuteInputDevice()
+   M Void UnmuteInputDevice()
+   M Void MuteOutputDevice()
+   M Void UnmuteOutputDevice()
+   M Task BlockPlayerAsync(String playerId)
+   M Task UnblockPlayerAsync(String playerId)
+   M Task SendChannelTextMessageAsync(String channelName, String message, MessageOptions options=null)
+   M Task EditChannelTextMessageAsync(String channelName, String messageId, String newMessage)
+   M Task DeleteChannelTextMessageAsync(String channelName, String messageId)
+   M Task SendDirectTextMessageAsync(String playerId, String message, MessageOptions options=null)
+   M Task EditDirectTextMessageAsync(String messageId, String newMessage)
+   M Task DeleteDirectTextMessageAsync(String messageId)
+   M Void StartAudioInjection(String audioFilePath)
+   M Void StopAudioInjection()
+   M Task SpeechToTextEnableTranscription(String channelName)
+   M Task SpeechToTextDisableTranscription(String channelName)
+   M Boolean IsSpeechToTextEnabled(String channelName)
+   M Void TextToSpeechSendMessage(String message, TextToSpeechMessageType messageType)
+   M Void TextToSpeechCancelAllMessages()
+   M Void TextToSpeechCancelMessages(TextToSpeechMessageType messageType)
+   M Void TextToSpeechSetVoice(String voiceName)
+   M Task<ReadOnlyCollection<VivoxMessage>> GetChannelTextMessageHistoryAsync(String channelName, Int32 requestSize=10, ChatHistoryQueryOptions chatHistoryQueryOptions=null)
+   M Task<ReadOnlyCollection<VivoxMessage>> GetDirectTextMessageHistoryAsync(String playerId=null, Int32 requestSize=10, ChatHistoryQueryOptions chatHistoryQueryOptions=null)
+   M Task SetMessageAsReadAsync(VivoxMessage message, Nullable<DateTime> seenAt=null)
+   M Task<ReadOnlyCollection<VivoxConversation>> GetConversationsAsync(ConversationQueryOptions options=null)
+   M Void Set3DPosition(GameObject participantObject, String channelName, Boolean allowPanning=True)
+   M Void Set3DPosition(Vector3 speakerPos, Vector3 listenerPos, Vector3 listenerAtOrient, Vector3 listenerUpOrient, String channelName, Boolean allowPanning=True)
+   M Task SetChannelTransmissionModeAsync(TransmissionMode transmissionMode, String channelName=null)
+   M Void SetTokenProvider(IVivoxTokenProvider tokenProvider)
+== interface Unity.Services.Vivox.IVivoxTokenProvider
+   M Task<String> GetTokenAsync(String issuer=null, Nullable<TimeSpan> expiration=null, String targetUserUri=null, String action=null, String channelUri=null, String fromUserUri=null, String realm=null)
+== class Unity.Services.Vivox.LoginOptions
+   P String PlayerId
+   P String DisplayName
+   P Boolean EnableTTS
+   P List<String> BlockedUserList
+   P ParticipantPropertyUpdateFrequency ParticipantUpdateFrequency
+   P List<String> SpeechToTextLanguages
+   C ()
+== class Unity.Services.Vivox.MessageOptions
+   P String Language
+   P String Metadata
+   C ()
+== class Unity.Services.Vivox.MintException
+   P String Detail
+   P Nullable<DateTime> ExpiresAt
+   P MintExceptionCode ExceptionCode
+== enum Unity.Services.Vivox.MintExceptionCode
+   Unauthorized, FailedToDecodeToken, ServiceDeprecated
+== enum Unity.Services.Vivox.ParticipantPropertyUpdateFrequency
+   Never, TenPerSecond, FivePerSecond, OnePerSecond, StateChange
+== enum Unity.Services.Vivox.TextToSpeechMessageType
+   RemoteTransmission, LocalPlayback, RemoteTransmissionWithLocalPlayback, QueuedRemoteTransmission, QueuedLocalPlayback, QueuedRemoteTransmissionWithLocalPlayback, ScreenReader
+== enum Unity.Services.Vivox.TransmissionMode
+   None, Single, All
+== class Unity.Services.Vivox.VivoxApiException
+   P Int32 StatusCode
+   P String RequestId
+== class Unity.Services.Vivox.VivoxConfigurationOptions
+   P Int32 RenderSourceQueueDepthMax
+   P Int32 RenderSourceInitialBufferCount
+   P Int32 UpstreamJitterFrameCount
+   P Int32 MaxLoginsPerUser
+   P VivoxLogLevel LogLevel
+   P Boolean DisableDevicePolling
+   P Boolean ForceCaptureSilence
+   P Boolean EnableAdvancedAutoLevels
+   P Int32 CaptureDeviceBufferSizeIntervals
+   P Int32 RenderDeviceBufferSizeIntervals
+   P Boolean DisableAudioDucking
+   P Boolean EnableDtx
+   P Boolean EnableFastNetworkChangeDetection
+   P Int32 UseOsProxySettings
+   P Boolean DynamicVoiceProcessingSwitching
+   P Boolean MobileRecordingConflictAvoidance
+   P Int32 NeverRtpTimeoutMs
+   P Int32 LostRtpTimeoutMs
+   P BluetoothProfile BluetoothProfile
+   P IosVoiceProcessingIOModes IosVoiceProcessingMode
+   P Boolean SkipPrepareForVivox
+   C ()
+== class Unity.Services.Vivox.VivoxConversation
+   P String Name
+   P ConversationType ConversationType
+== enum Unity.Services.Vivox.VivoxInitializationState
+   Uninitialized, Initializing, Initialized, Failed
+== class Unity.Services.Vivox.VivoxInputDevice
+   P String DeviceName
+   P String DeviceID
+   M Task SetActiveDeviceAsync()
+== enum Unity.Services.Vivox.VivoxLogLevel
+   Error, Warning, Info, Debug, Trace, All, None
+== class Unity.Services.Vivox.VivoxMessage
+   P String SenderPlayerId
+   P String SenderDisplayName
+   P String RecipientPlayerId
+   P String ChannelName
+   P String MessageText
+   P Boolean FromSelf
+   P DateTime ReceivedTime
+   P String Language
+   P String MessageId
+   P Boolean IsRead
+   P Boolean IsTranscribedMessage
+   P String Metadata
+   M Task SetMessageAsReadAsync(Nullable<DateTime> seenAt=null)
+== class Unity.Services.Vivox.VivoxObserver
+   P Boolean IsServiceInitialized
+   P Boolean IsLoggedIn
+   P Boolean IsInTargetChannel
+   P IVivoxService VivoxService
+   E Action ServiceInitialized
+   E Action<Exception> ServiceInitializationFailed
+   E Action LoggedIn
+   E Action LoggedOut
+   E Action<String> ChannelJoined
+   E Action<String> ChannelLeft
+   E Action<VivoxParticipant> ParticipantJoined
+   E Action<VivoxParticipant> ParticipantLeft
+   E Action<VivoxMessage> ChannelMessageReceived
+   E Action<VivoxMessage> ChannelMessageEdited
+   E Action<VivoxMessage> ChannelMessageDeleted
+   E Action<VivoxMessage> DirectMessageReceived
+   E Action<VivoxMessage> DirectMessageEdited
+   E Action<VivoxMessage> DirectMessageDeleted
+   E Action AvailableInputDevicesChanged
+   E Action EffectiveInputDeviceChanged
+   E Action AvailableOutputDevicesChanged
+   E Action EffectiveOutputDeviceChanged
+   M Void Dispose()
+   C (VivoxObserverType observerType, String targetChannelName, IUnityServices registry)
+   C (VivoxObserverType observerType, String targetChannelName=null)
+== enum Unity.Services.Vivox.VivoxObserverType
+   None, Login, Channel, ChannelMessages, DirectMessages, AudioDevices, All
+== class Unity.Services.Vivox.VivoxOutputDevice
+   P String DeviceName
+   P String DeviceID
+   M Task SetActiveDeviceAsync()
+== class Unity.Services.Vivox.VivoxParticipant
+   P String DisplayName
+   P String PlayerId
+   P String URI
+   P String ChannelName
+   P String ChannelURI
+   P Boolean SpeechDetected
+   P Boolean IsMuted
+   P Boolean IsSelf
+   P Boolean IsInAudio
+   P Boolean IsInText
+   P Int32 LocalVolume
+   P Double AudioEnergy
+   P AudioSource ParticipantTapAudioSource
+   E Action ParticipantMuteStateChanged
+   E Action ParticipantSpeechDetected
+   E Action ParticipantAudioEnergyChanged
+   E Action ParticipantAudioStateChanged
+   E Action ParticipantTextStateChanged
+   M Void SetLocalVolume(Int32 volume)
+   M Void MutePlayerLocally()
+   M Void UnmutePlayerLocally()
+   M GameObject CreateVivoxParticipantTap(String gameObjectName=, Boolean silenceInChannelAudioMix=True)
+   M Void DestroyVivoxParticipantTap()
+== static class Unity.Services.Vivox.VivoxService
+   P IVivoxService Instance
+##### Unity.Services.Vivox.Editor

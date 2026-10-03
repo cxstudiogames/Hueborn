@@ -1,0 +1,30 @@
+time: 03/10/2026 13:56:05  frames 151  avg GC/frame 1241 B
+
+Top allocators (avg bytes per frame, self):
+      368 B   LateBehaviourUpdate > Assembly-CSharp.dll!ColorRPG::HUD.LateUpdate() [Invoke] > GC.Alloc
+      180 B   DestroyDrawInstances.ParallelSort > Burst.EditorIntegration.Client.dll!Burst.Compiler.IL.Jit::JitCompilerService.CompileInternal() [Invoke] > GC.Alloc
+      136 B   DestroyDrawInstanceIndices.RemoveDrawInstanceIndices > Burst.EditorIntegration.Client.dll!Burst.Compiler.IL.Jit::JitCompilerService.CompileInternal() [Invoke] > GC.Alloc
+       90 B   DestroyDrawInstances > Burst.EditorIntegration.Client.dll!Burst.Compiler.IL.Jit::JitCompilerService.CompileInternal() [Invoke] > GC.Alloc
+       85 B   Update.ScriptRunDelayedTasks > UnityEngine.CoreModule.dll!UnityEngine::UnitySynchronizationContext.ExecuteTasks() [Invoke] > GC.Alloc
+       72 B   ActionScheduler > UnityEngine.CoreModule.dll!::UpdateFunction.Invoke() [Invoke] > GC.Alloc
+       42 B   DestroyDrawInstances > DestroyDrawInstances.ParallelSort > GC.Alloc
+       39 B   DestroyDrawInstances > DestroyDrawInstanceIndices.RemoveDrawInstanceIndices > GC.Alloc
+       35 B   EarlyUpdate.ExecuteMainThreadJobs > UnityEngine.CoreModule.dll!UnityEngine::AsyncOperation.InvokeCompletionEvent() [Invoke] > GC.Alloc
+       32 B   BehaviourUpdate > Assembly-CSharp.dll!ColorRPG::Mp.Update() [Invoke] > GC.Alloc
+       24 B   CoroutinesDelayedCalls > Unity.Services.Vivox.dll!Unity.Services.Vivox::VxUnityInterop.VivoxUnityRun() [Coroutine: MoveNext] [Invoke] > GC.Alloc
+       23 B   BehaviourUpdate > Assembly-CSharp.dll!ColorRPG::Leaderboard.Update() [Invoke] > GC.Alloc
+       20 B   DestroyDrawInstances.ParallelSort > UnityEngine.BurstModule.dll!Unity.Burst.LowLevel::BurstCompilerService.InvokeExtractCompilerFlags() [Invoke] > GC.Alloc
+       18 B   FixedUpdate.NewInputFixedUpdate > UnityEngine.InputModule.dll!UnityEngineInternal.Input::NativeInputSystem.NotifyBeforeUpdate() [Invoke] > GC.Alloc
+       17 B   FrameEvents.NewInputBeforeRenderUpdate > UnityEngine.InputModule.dll!UnityEngineInternal.Input::NativeInputSystem.NotifyBeforeUpdate() [Invoke] > GC.Alloc
+       17 B   PreUpdate.NewInputUpdate > UnityEngine.InputModule.dll!UnityEngineInternal.Input::NativeInputSystem.NotifyBeforeUpdate() [Invoke] > GC.Alloc
+       13 B   DestroyMeshRendererInstances > DestroyDrawInstances > GC.Alloc
+       10 B   DestroyDrawInstances > UnityEngine.BurstModule.dll!Unity.Burst.LowLevel::BurstCompilerService.InvokeExtractCompilerFlags() [Invoke] > GC.Alloc
+        8 B   UnityEngine.CoreModule.dll!::ParallelForJobStruct`1..cctor() > UnityEngine.CoreModule.dll!::HashCode64`1..cctor() > GC.Alloc
+        8 B   UnityEngine.CoreModule.dll!::JobStruct`1..cctor() > UnityEngine.CoreModule.dll!::HashCode64`1..cctor() > GC.Alloc
+        3 B   BehaviourUpdate > Assembly-CSharp.dll!ColorRPG::ChatUI.Update() [Invoke] > GC.Alloc
+        3 B   Unity.Collections.dll!::ParallelWriter..cctor() > UnityEngine.BurstModule.dll!::HashCode64`1..cctor() > GC.Alloc
+        1 B   UnityEngine.CoreModule.dll!::UpdateFunction.Invoke() [Invoke] > mscorlib.dll!System.Runtime.CompilerServices::AsyncTaskMethodBuilder`1..cctor() > GC.Alloc
+        1 B   DestroyDrawInstances.ParallelSort > mscorlib.dll!System::Delegate.get_Method() [Invoke] > GC.Alloc
+        0 B   DestroyDrawInstances.ParallelSort > UnityEngine.CoreModule.dll!::JobStruct`1..cctor() > GC.Alloc
+        0 B   DestroyDrawInstances.ParallelSort > UnityEngine.CoreModule.dll!::ParallelForJobStruct`1..cctor() > GC.Alloc
+        0 B   DestroyDrawInstances > mscorlib.dll!System::Delegate.get_Method() [Invoke] > GC.Alloc

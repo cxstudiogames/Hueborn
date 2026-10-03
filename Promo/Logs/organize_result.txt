@@ -1,0 +1,4 @@
+time: 02/10/2026 14:10:57
+Hierarchy: 0 objects grouped into 0 folders (positions unchanged). Save the scene (Ctrl+S) to keep it.
+Folders: 3 files moved. Promo -> Video / Screenshots / Renders / Store / Brand / Logs; old scene backups -> _Backups/Scenes.
+scene saved: Assets/Scenes/SampleScene.unity
